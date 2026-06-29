@@ -229,7 +229,7 @@ const AdminLogin = () => {
                     </div>
                     {fieldErrors.password && <p className="text-red-400 text-[10px] pl-1 font-medium">{fieldErrors.password}</p>}
 
-                    {password && !fieldErrors.password && (
+                    {/* {password && !fieldErrors.password && (
                       <div className="pt-1 flex items-center gap-2 px-1">
                         <div className="flex gap-1 flex-1">
                           <div className={`h-[2px] flex-1 rounded-full transition-all duration-500 ${getPasswordStrength() >= 1 ? 'bg-[#ff4a4a]' : 'bg-neutral-900'}`} />
@@ -240,7 +240,7 @@ const AdminLogin = () => {
                           {getPasswordStrength() === 3 ? 'Strong' : 'Weak'}
                         </span>
                       </div>
-                    )}
+                    )} */}
                   </div>
 
                   <button
@@ -257,7 +257,6 @@ const AdminLogin = () => {
               </div>
             )}
 
-            {/* ── MODE: FORGOT PASSWORD ── */}
             {formMode === 'forgot' && (
               <div>
                 <div className="mb-5">

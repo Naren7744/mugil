@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { FaCrown, FaTimes } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 import { FiArrowUpRight, FiMapPin, FiMaximize2, FiCpu, FiCompass, FiShield, FiCalendar, FiLayers } from 'react-icons/fi';
 
 const Gallery = () => {
+
   const [activeFilter, setActiveFilter] = useState('ALL');
   const [selectedImage, setSelectedImage] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(0);
 
   const filters = ['ALL', 'STRENGTH FLOOR', 'CARDIO', 'RECOVERY'];
+const navigate = useNavigate();
+
 
   const galleryData = [
     {
@@ -258,8 +262,11 @@ const Gallery = () => {
             </div>
 
             <div className="lg:col-span-4 w-full">
-              <button   data-aos="zoom-in"
-  data-aos-delay="250" className="w-full bg-[#ffc114] text-black hover:bg-white font-black text-[11px] tracking-[0.25em] px-6 py-4 transition-all duration-300 uppercase flex items-center justify-center gap-2.5 cursor-pointer shadow-2xl shadow-amber-500/5">
+              <button  
+              onClick={() => navigate("/contact")}
+               data-aos="zoom-in"
+  data-aos-delay="250" 
+  className="w-full bg-[#ffc114] text-black hover:bg-white font-black text-[11px] tracking-[0.25em] px-6 py-4 transition-all duration-300 uppercase flex items-center justify-center gap-2.5 cursor-pointer shadow-2xl shadow-amber-500/5">
                 <FiCalendar className="text-sm" />
                 <span>BOOK A FREE VISIT</span>
               </button>

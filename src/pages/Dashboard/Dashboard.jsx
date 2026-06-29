@@ -734,7 +734,7 @@ const pendingMembers = filteredMembers
       key={index}
       type="button"
       onClick={act.action}
-      className={`flex flex-col items-center justify-center p-6 bg-white border border-slate-150 rounded-[24px] text-center transition-all duration-300 ease-out group active:scale-[0.96] hover:-translate-y-1 shadow-sm ${act.accent}`}
+      className={`flex flex-col items-center justify-center p-6 bg-white border border-slate-150 rounded-[13px] text-center transition-all duration-300 ease-out group active:scale-[0.96] hover:-translate-y-1 shadow-sm ${act.accent}`}
     >
       <div
         className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs border border-transparent ${act.iconBg}`}

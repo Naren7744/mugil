@@ -94,7 +94,7 @@ function Sidebar({
 </div>
 
         {/* =================  INTERACTIVE NAVIGATION ITEMS ================= */}
-<div className="px-3 py-4 space-y-1 overflow-y-auto h-[calc(100vh-180px)] custom-sidebar-scroll">
+<div className="px-3 py-4 space-y-1 overflow-y-auto flex-1 min-h-0 custom-sidebar-scroll">
   <p className="text-slate-600 text-[10px] uppercase font-bold tracking-[2.5px] px-4 mb-4">
     Management Suite
   </p>

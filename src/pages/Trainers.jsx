@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { FaInstagram, FaCrown, FaStar } from 'react-icons/fa';
 import { FiArrowRight, FiLayers, FiCalendar, FiChevronDown, FiCheckCircle } from 'react-icons/fi';
+import { useNavigate } from "react-router-dom";
 
 const Trainers = () => {
   const [expandedSpec, setExpandedSpec] = useState(0);
+const navigate = useNavigate();
+
 
   const trainer = {
     name: "UDHAYA SURIYAN",
@@ -227,7 +230,9 @@ const Trainers = () => {
 
             <div   data-aos="fade-left"
   data-aos-delay="300" className="lg:col-span-4 w-full">
-              <button className="w-full bg-[#ffc114] text-black hover:bg-white font-black text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.25em] px-5 py-4 transition-all duration-300 uppercase flex items-center justify-center gap-2 cursor-pointer shadow-xl shadow-yellow-500/5">
+              <button 
+              onClick={() => navigate("/contact")}
+              className="w-full bg-[#ffc114] text-black hover:bg-white font-black text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.25em] px-5 py-4 transition-all duration-300 uppercase flex items-center justify-center gap-2 cursor-pointer shadow-xl shadow-yellow-500/5">
                 <FiCalendar className="text-sm shrink-0" />
                 <span>BOOK A FREE SESSION</span>
               </button>

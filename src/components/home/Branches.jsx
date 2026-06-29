@@ -14,7 +14,7 @@ const Branches = () => {
         "Mon - Sat: 04:00 PM - 10:00 PM",
         "Sunday: Morning Session Only"
       ],
-      phone: "+91 93615 48255",
+      phone: "+91 80987 12009",
       mapUrl: "https://maps.app.goo.gl/3pF5azccNj2gykoCA"
     },
     {
@@ -27,13 +27,13 @@ const Branches = () => {
         "Mon - Sat: 04:00 PM - 10:00 PM",
         "Sunday: Morning Session Only"
       ],
-      phone: "+91 95003 21677",
+      phone: "+91 80987 12009",
       mapUrl: "https://maps.app.goo.gl/YGY69xAfmz3xRFHfA"
     }
   ];
 
   return (
-    <section className="py-24 w-full bg-[#020202] border-b border-white/[0.02] relative overflow-hidden select-none">
+    <section className="py-15 w-full bg-[#020202] border-b border-white/[0.02] relative overflow-hidden select-none">
       
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#ffc114]/[0.01] rounded-full blur-[140px] pointer-events-none" />
 

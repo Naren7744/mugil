@@ -4,7 +4,7 @@ import { FiCheckCircle } from 'react-icons/fi';
 
 const TrainersPreview = () => {
   const trainerData = {
-    name: "UDHAYA SURYAN",
+    name: "UDHAYA SURIYAN",
     role: "Founder & Head Bio-Mechanics",
     img: "/images/trainer-1.jpg", 
     bio: "Architecting high-end human biomechanics and structural transformation. Specializing in elite conditioning, kinetic optimization, and neuromuscular performance protocols tailored for high-performance athletes.",

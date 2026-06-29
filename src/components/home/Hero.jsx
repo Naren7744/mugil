@@ -1,8 +1,10 @@
 import React from 'react';
 import { FiArrowUpRight, FiClock, FiActivity, FiMapPin } from 'react-icons/fi';
 import { FaCrown } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative h-screen w-full bg-[#030303] overflow-hidden flex flex-col justify-between select-none">
       
@@ -60,35 +62,41 @@ const Hero = () => {
             Premium Fitness. Premium You. Architecting human longevity and muscle mechanics from the ground up.
           </p>
 
-          <div   data-aos="zoom-in"
-  data-aos-delay="500" className="pt-2 lg:pt-4 flex justify-start items-center w-full">
-            <button className="
-              w-full sm:w-auto 
-              bg-[#ffc114] text-black 
-              hover:bg-white border border-[#ffc114] hover:border-white 
-              font-black 
-              text-[11px] sm:text-[12px] 
-              tracking-[0.25em] 
-              px-8 py-4
-              rounded-none 
-              transition-all duration-500 
-              uppercase 
-              cursor-pointer 
-              flex items-center justify-center gap-3.5 
-              shadow-2xl shadow-amber-500/5 
-              group
-            ">
-              <span>START YOUR JOURNEY</span>
-              <FiArrowUpRight className="text-sm transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
-            </button>
-          </div>
+       <div
+  data-aos="zoom-in"
+  data-aos-delay="500"
+  className="pt-2 lg:pt-4 flex justify-start items-center w-full"
+>
+ 
+    <button
+    onClick={() => navigate("/contact")}
+      className="
+        w-full sm:w-auto
+        bg-[#ffc114] text-black
+        hover:bg-white border border-[#ffc114] hover:border-white
+        font-black
+        text-[11px] sm:text-[12px]
+        tracking-[0.25em]
+        px-8 py-4
+        rounded-none
+        transition-all duration-500
+        uppercase
+        cursor-pointer
+        flex items-center justify-center gap-3.5
+        shadow-2xl shadow-amber-500/5
+        group
+      "
+    >
+      <span>START YOUR JOURNEY</span>
+      <FiArrowUpRight className="text-sm transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
+    </button>
+  
+</div>
 
         </div>
       </div>
 
-      {/* =========================================================================
-          BOTTOM METRICS BAR: Bounded securely at the lower viewport edge
-         ========================================================================= */}
+ 
       <div   data-aos="fade-up"
   data-aos-delay="700" className="w-full border-t border-white/[0.04] py-4 bg-black/70 backdrop-blur-md z-30 shrink-0 select-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 text-[9px] lg:text-[10px] font-medium tracking-[0.18em] text-zinc-500 uppercase">

@@ -1010,7 +1010,7 @@ const subText =
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10 mb-10">
 
           {/* Revenue chart */}
-          <div className="bg-gradient-to-b from-white to-slate-50/50 border border-slate-200/70 rounded-[2rem] p-7 shadow-sm hover:shadow-lg transition-all duration-500 space-y-5  min-w-0">
+          <div className="bg-gradient-to-b from-white to-slate-50/50 border border-slate-200/70 rounded-[1.5rem] p-7 shadow-sm hover:shadow-lg transition-all duration-500 space-y-5  min-w-0">
             <div className="flex justify-between items-start">
               <div>
                 <h4 className="text-[11px] font-black text-slate-900 uppercase tracking-widest bg-slate-100/80 px-2.5 py-1 rounded-md inline-block">
@@ -1061,7 +1061,7 @@ dateRange==="today"
           </div>
 
           {/* Membership chart */}
-          <div className="bg-gradient-to-b from-white to-slate-50/50 border border-slate-200/70 rounded-[2rem] p-7 shadow-sm hover:shadow-lg transition-all duration-500 space-y-5">
+          <div className="bg-gradient-to-b from-white to-slate-50/50 border border-slate-200/70 rounded-[1.5rem] p-7 shadow-sm hover:shadow-lg transition-all duration-500 space-y-5">
             <div className="flex justify-between items-start">
               <div>
                 <h4 className="text-[11px] font-black text-slate-900 uppercase tracking-widest bg-slate-100/80 px-2.5 py-1 rounded-md inline-block">
@@ -1115,7 +1115,7 @@ dateRange==="today"
 
         {/* ── Report Download Cards ──────────────────────────────────────────── */}
         <div className="space-y-6">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-slate-50/60 border border-slate-200/50 rounded-[1.75rem] p-5">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-slate-50/60 border border-slate-200/50 rounded-[1rem] p-5">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-3 bg-sky-500 rounded-full" />
@@ -1140,7 +1140,7 @@ dateRange==="today"
               return (
                 <div
                   key={card.id}
-                  className="group bg-white border border-slate-200/70 hover:border-sky-400/60 rounded-[2rem] p-6 shadow-sm hover:shadow-xl hover:shadow-sky-500/5 flex flex-col justify-between min-h-[190px] transition-all duration-500"
+                  className="group bg-white border border-slate-200/70 hover:border-sky-400/60 rounded-[1.5rem] p-6 shadow-sm hover:shadow-xl hover:shadow-sky-500/5 flex flex-col justify-between min-h-[190px] transition-all duration-500"
                 >
                   <div className="space-y-4">
                     <div className="flex justify-between items-start">
