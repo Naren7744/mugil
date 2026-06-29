@@ -181,7 +181,7 @@ const paymentMethods = [
     <div className="w-full min-h-screen bg-[#f4f6f8] flex flex-col font-sans select-none overflow-x-hidden">
       
 {/* ================= STANDARD PAGE HEADER ================= */}
-      <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 mt-6">
+      <div className="max-w-[1200px] mx-auto w-full px-0 sm:px-4 lg:px-6 mt-6">
         <PageHeader
           title="Collect Payment"
           description="Process secure transactions and manage member ledgers globally."
@@ -229,11 +229,11 @@ const paymentMethods = [
         />
       </div>
 
-      <div className="flex-1 w-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
+      <div className="flex-1 w-full flex items-center justify-center p-0 sm:p-2 lg:p-4">
 
         {/* ================= SEARCH INTERFACE ================= */}
         {!selectedMember ? (
-          <div className="w-full max-w-2xl bg-white rounded-3xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden animate-slide-up">
+          <div className="w-full max-w-3xl bg-white rounded-2xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden animate-slide-up">
             <div className="p-8 text-center bg-[#0a2540] text-white">
               <h2 className="text-2xl font-black tracking-tight mb-2">Search Customer</h2>
               <p className="text-sm font-semibold text-slate-400">Select a member to proceed to checkout.</p>
@@ -328,10 +328,10 @@ const paymentMethods = [
         ) : (
 
         /* ================= PREMIUM CHECKOUT PAGE ================= */
-          <div className="w-full max-w-[1000px] bg-white rounded-[15px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] flex flex-col md:flex-row overflow-hidden animate-slide-up border border-slate-100">
+          <div className="w-full max-w-[1400px] bg-white rounded-[15px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] flex flex-col md:flex-row overflow-hidden animate-slide-up border border-slate-100">
             
             {/* LEFT SIDE: INVOICE / CART SUMMARY (Stripe Dark Blue Style) */}
-            <div className="w-full md:w-[40%] bg-[#0a2540] p-8 sm:p-10 text-white flex flex-col justify-between relative overflow-hidden">
+            <div className="w-full md:w-[40%] bg-[#0a2540] p-6 sm:p-8 text-white flex flex-col justify-between relative overflow-hidden">
               {/* Background Accent */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#635bff]/20 rounded-full blur-[80px] pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
               

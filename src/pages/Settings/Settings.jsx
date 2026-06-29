@@ -224,7 +224,7 @@ function Settings() {
 
   // ── Render ──────────────────────────────────────────────────────────────────
   return (
-    <div className="w-full text-slate-800 bg-[#f8fafc] min-h-screen pb-20 antialiased selection:bg-indigo-600 selection:text-white">
+    <div className="w-full font-sans text-slate-800 bg-[#f8fafc] min-h-screen pb-20 antialiased selection:bg-indigo-600 selection:text-white">
       <Toast toast={toast} />
 
       {/* ── Page Header ─────────────────────────────────────────────────────── */}

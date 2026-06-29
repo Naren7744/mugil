@@ -476,7 +476,7 @@ Add Branch
   }
 />
 
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8 space-y-6">
+      <div className="w-full max-w-[1800px] mx-auto px-0 sm:px-2 lg:px-0 mt-6 sm:mt-8 space-y-6">
 
         {/* ── Stat Cards ─────────────────────────────────────────── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
