@@ -23,7 +23,7 @@ import Gallery from "../pages/Gallery";
 /* ================= AUTH ================= */
 import AdminLogin from "../pages/AdminLogin";
 import ProtectedRoute from "../components/ProtectedRoute";
-import ResetPassword from "../pages/ResetPassword"; 
+import ResetPassword from "../pages/Resetpassword"; 
 
 /* ================= ADMIN DASHBOARD ================= */
 import Dashboard from "../pages/Dashboard/Dashboard";
