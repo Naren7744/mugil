@@ -494,7 +494,7 @@ const handlePrintClick = () => {
   const bmiCategory = getBmiCategory(formData.bmi);
 
   return (
-    <div className="w-full text-slate-800 animate-fade-in select-none font-sans min-h-screen pb-16 bg-[#f8fafc]/40">
+    <div className=" font-sans w-full text-slate-800 animate-fade-in select-none font-sans min-h-screen pb-16 bg-[#f8fafc]/40">
 
       {/* ── HEADER ── */}
       <PageHeader

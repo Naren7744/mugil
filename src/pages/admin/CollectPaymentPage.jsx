@@ -187,7 +187,6 @@ const paymentMethods = [
           description="Process secure transactions and manage member ledgers globally."
           rightContent={
             <div className="flex flex-wrap items-center gap-3 mt-4 sm:mt-0">
-              {/* Secure Badge (Optional but gives premium feel) */}
               <div className="hidden sm:flex items-center gap-2 text-[#0a2540] bg-slate-100 border border-slate-200 px-4 py-2.5 rounded-lg">
                 <FiLock size={14} className="stroke-[3]" />
                 <span className="text-[10px] font-black uppercase tracking-widest">Secure Gateway</span>

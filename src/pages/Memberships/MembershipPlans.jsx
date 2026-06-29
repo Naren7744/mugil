@@ -333,7 +333,7 @@ const handleDeletePlan = async (id) => {
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <div className="space-y-4 sm:space-y-6 text-slate-800 animate-fade-in select-none relative min-h-screen pb-24 sm:pb-12 overflow-x-hidden">
+    <div className=" font-sans space-y-4 sm:space-y-6 text-slate-800 animate-fade-in select-none relative min-h-screen pb-24 sm:pb-12 overflow-x-hidden">
 
       <PageHeader
         title="Subscription Plans"

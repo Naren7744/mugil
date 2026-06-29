@@ -104,3 +104,10 @@
 .custom-sidebar-scroll::-webkit-scrollbar {
   width: 4px;
 } 
+
+.admin-heading{
+    font-family: "Sora", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}

@@ -100,7 +100,6 @@ const [paymentForm, setPaymentForm] =
   });
 
 
-  // Global filters synchronization pipeline
 const paymentData = transactions.map((member) => {
 
   const latestPayment =
@@ -288,7 +287,6 @@ const handleCollect = (member) => {
   `/admin/payments/collect/${member._id}`
 );
 };
-  // Helper function for Status Badges
 const renderStatus = (status) => {
   switch (status) {
     case "Fully Paid":
@@ -629,7 +627,6 @@ const totalCollected = members.reduce(
     return new Date(m.expiryDate) < new Date();
   }).length;
 
-  // ===== HEADER SECTION =====
   doc.setFillColor(15, 23, 42); 
   doc.rect(0, 0, 210, 42, "F");
 
@@ -653,7 +650,6 @@ const totalCollected = members.reduce(
   doc.setTextColor(148, 163, 184);
   doc.text(`Date: ${new Date().toLocaleDateString("en-IN")}`, 196, 28, { align: "right" });
 
-  // ===== WATERMARK (FIXED: Perfectly Centered diagonally across the page) =====
   doc.setTextColor(241, 245, 249); 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(50); 
@@ -661,7 +657,6 @@ const totalCollected = members.reduce(
   doc.text("MUGIL & SP FITNESS", 50, 230, { angle: 45 });
 
 
-  // ===== FINANCIAL SUMMARY CARDS (4 Cards) =====
   let currentY = 55;
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
@@ -670,25 +665,22 @@ const totalCollected = members.reduce(
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
-  doc.setTextColor(16, 185, 129); // Emerald Green
+  doc.setTextColor(16, 185, 129); 
   doc.text(`Fully Paid Members: ${fullyPaid}`, 196, currentY, { align: "right" });
 
-  doc.setDrawColor(226, 232, 240); // Clean divider line
+  doc.setDrawColor(226, 232, 240); 
   doc.line(14, currentY + 4, 196, currentY + 4);
 
   currentY += 10;
   
-  // Create 4 premium boxes dynamically calculated to fit 196 width perfectly
   doc.setFillColor(248, 250, 252); 
   doc.setDrawColor(226, 232, 240); 
   
-  // Rectangles: (x, y, width, height, radiusX, radiusY, style)
   doc.roundedRect(14, currentY, 42.5, 24, 3, 3, "FD");    // Members Box
   doc.roundedRect(60.5, currentY, 42.5, 24, 3, 3, "FD");  // Collected Box
   doc.roundedRect(107, currentY, 42.5, 24, 3, 3, "FD");   // Balance Box
   doc.roundedRect(153.5, currentY, 42.5, 24, 3, 3, "FD"); // Expired Box
 
-  // 1. Total Members Box Content
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(100, 116, 139);
@@ -698,7 +690,6 @@ const totalCollected = members.reduce(
   doc.setTextColor(30, 41, 59);
   doc.text(`${totalMembers}`, 35.25, currentY + 16, { align: "center" });
 
-  // 2. Collected Box Content
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(100, 116, 139);
@@ -961,7 +952,6 @@ const totalPages = Math.ceil(
     <>
     <div className="w-full text-slate-800 animate-fade-in select-none font-sans min-h-screen pb-12 bg-slate-50/50 max-w-full overflow-hidden">
       
-      {/* ================= 👑 SUB-HEADER MATRIX VECTOR CONTROLS ================= */}
       <PageHeader
         title="Fee Management"
         description="Track all payments, collections, and financial transactions globally."

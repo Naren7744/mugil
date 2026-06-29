@@ -395,7 +395,7 @@ const handleExport = () => {
 
   /* ── Render ─────────────────────────────────────────────────────── */
   return (
-    <div className="w-full min-h-screen bg-slate-50/50 pb-18 text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+    <div className=" font-sans w-full min-h-screen bg-slate-50/50 pb-18 text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900">
 
       {/* Page Header */}
  <PageHeader

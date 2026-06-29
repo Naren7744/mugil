@@ -393,7 +393,7 @@ const reversedPayments =
 return (
     <>
 
-<div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+<div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6 font-sans">
 
   <PageHeader
     title="Payment History"

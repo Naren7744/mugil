@@ -286,7 +286,7 @@ const handleAttendanceTableDrag = (e) => {
 
 
   return (
-    <div className="w-full text-slate-800 animate-fade-in select-none font-sans min-h-screen pb-12">
+    <div className=" w-full text-slate-800 animate-fade-in select-none font-sans min-h-screen pb-12">
       
       {/* ================= SUB-HEADER DIRECTORY ROW ================= */}
       <PageHeader

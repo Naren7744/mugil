@@ -367,9 +367,8 @@ const handleMembersTableDrag = (e) => {
 };
 
   return (
-    <div className="space-y-6 text-slate-800 animate-fade-in select-none relative min-h-screen pb-24 lg:pb-12 bg-slate-50/50 w-full max-w-full">
+    <div className=" font-sans space-y-6 text-slate-800 animate-fade-in select-none relative min-h-screen pb-24 lg:pb-12 bg-slate-50/50 w-full max-w-full">
       
-      {/* ================= 👑 SUB-HEADER & BRANCH SELECTOR ================= */}
       <PageHeader
         title="Member Directory"
         description="Comprehensive member analytics and database management."
@@ -379,7 +378,6 @@ const handleMembersTableDrag = (e) => {
         }
       />
 
- {/* ================= 📊 STAGE 1: INTERACTIVE KPI DASHBOARD ================= */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-6 select-none">
         
       

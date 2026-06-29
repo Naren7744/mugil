@@ -34,11 +34,9 @@ if (location.pathname.includes("/members/new")) {
   return (
     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 mb-6">
 
-      {/* LEFT SIDE */}
       <div>
-
         {/* Breadcrumb */}
-<div className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[2px]">
+<div className="flex items-center gap-1.5 text-[11px]  uppercase tracking-[2px]">
 
   <Link
     to="/admin/dashboard"
@@ -86,12 +84,21 @@ if (location.pathname.includes("/members/new")) {
 </div>
 
         {/* Page Title */}
-        <h2 className="mt-2 text-3xl font-black tracking-tight text-slate-900">
-          {title}
-        </h2>
+       <h2
+  className="
+    mt-2
+    text-2xl
+    md:text-4xl
+    admin-heading
+    tracking-tight
+    text-slate-900
+  "
+>
+  {title}
+</h2>
 
         {/* Description */}
-        <p className="mt-1 text-xs font-medium text-slate-400 max-w-2xl">
+       <p className="mt-2 text-sm font-medium text-slate-500 max-w-2xl">
           {description}
         </p>
 

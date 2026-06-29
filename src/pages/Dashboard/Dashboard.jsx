@@ -228,7 +228,14 @@ const pendingMembers = filteredMembers
       {/* ═══════════════ SUB-HEADER ═══════════════ */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-2 select-none">
         <div>
-          <h2 className="text-2xl font-black tracking-tight text-slate-900">
+          <h2  className="
+    mt-2
+    text-2xl
+    md:text-3xl
+    admin-heading
+    tracking-tight
+    text-slate-900
+  ">
             Welcome to{" "}
             <span className="bg-gradient-to-r from-violet-600 to-blue-500 bg-clip-text text-transparent">
               {branchLabel}
