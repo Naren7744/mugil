@@ -19,7 +19,11 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: [
+      "http://localhost:5173",
+      "https://mugil-ruby.vercel.app",
+      "https://mugil-naren444.vercel.app",
+    ],
     credentials: true,
   })
 );
