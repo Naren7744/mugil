@@ -1,20 +1,24 @@
 import axios from "axios";
 
+console.log("API URL:", import.meta.env.VITE_API_URL);
+
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
+// ===============================
 // Request Interceptor
+// ===============================
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("adminToken");
 
     if (token) {
       config.headers.Authorization = token;
-      // If you removed "Bearer " from backend response, use:
+      // Or:
       // config.headers.Authorization = `Bearer ${token}`;
     }
 
@@ -23,7 +27,9 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// ===============================
 // Response Interceptor
+// ===============================
 api.interceptors.response.use(
   (response) => response,
   (error) => {

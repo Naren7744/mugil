@@ -101,7 +101,9 @@ const membersPerPage = 10;
   memberView,
   currentBranch
 ]);
-
+console.log("allMembers:", allMembers);
+console.log("Is Array:", Array.isArray(allMembers));
+console.log("currentBranch:", currentBranch);
 const activeBranchMembers =
   currentBranch === "ALL_BRANCHES"
     ? allMembers
@@ -110,6 +112,8 @@ const activeBranchMembers =
           m.branch?.trim() ===
           currentBranch?.trim()
       );
+
+    console.log("activeBranchMembers:", activeBranchMembers);
 
   const searchText = (searchQuery || "").toLowerCase();
 
