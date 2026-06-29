@@ -9,7 +9,7 @@ import { FiArrowUp } from 'react-icons/fi';
 
 const MainLayout = () => {
   return (
-    <div className="bg-dark-bg min-h-screen flex flex-col justify-between overflow-x-hidden">
+    <div className="bg-dark-bg min-h-screen flex flex-col justify-between overflow-x-hidden admin-font">
       <div>
         <Navbar />
         <main>

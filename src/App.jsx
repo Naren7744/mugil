@@ -7,7 +7,6 @@ function App() {
   return (
     <div className="bg-dark-bg text-white min-h-screen selection:bg-gold selection:text-black overflow-x-hidden antialiased">
       <Router>
-        {/* Core Architectural Sub-Routing Navigation Systems */}
         <AppRoutes />
       </Router>
     </div>

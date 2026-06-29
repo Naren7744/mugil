@@ -116,7 +116,7 @@ const AdminLogin = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#ff4a4a]/[0.025] rounded-full blur-[180px] pointer-events-none z-0" />
 
       {/* Main card */}
-      <div className="w-full max-w-4xl min-h-[460px] bg-[#0d0d11]/50 backdrop-blur-3xl border border-neutral-900 rounded-[2.5rem] shadow-[0_50px_100px_rgba(0,0,0,0.95)] flex flex-col md:flex-row overflow-hidden relative z-10 transition-all duration-500 hover:border-[#ff4a4a]/20">
+      <div className="w-full max-w-4xl min-h-[460px] bg-[#0d0d11]/50 backdrop-blur-3xl border border-neutral-900 rounded-[1.5rem] shadow-[0_50px_100px_rgba(0,0,0,0.95)] flex flex-col md:flex-row overflow-hidden relative z-10 transition-all duration-500 hover:border-[#ff4a4a]/20">
 
         {/* Top accent line */}
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#ff4a4a]/30 to-transparent" />
@@ -128,7 +128,7 @@ const AdminLogin = () => {
           <div
             className="absolute inset-0 opacity-15 scale-105 contrast-125 saturate-50"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200')`,
+             backgroundImage: "url('/images/about-2.jpg')",
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}

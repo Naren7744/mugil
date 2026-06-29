@@ -316,11 +316,7 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} <span className="text-zinc-300 font-black tracking-[0.25em] transition-colors duration-500 group-hover/sub:text-[#ffc114]">MUGIL FITNESS</span> & <span className="text-zinc-300 font-black tracking-[0.25em] transition-colors duration-500 group-hover/sub:text-[#ffc114]">SP FITNESS</span>. ALL RIGHTS RESERVED.
           </p>
 
-          <div className="flex items-center gap-6 text-[8px] text-zinc-500 font-bold tracking-[0.2em]">
-            <span className="cursor-pointer hover:text-white transition-colors duration-300">BIOLOGICAL MASTERY</span>
-            <span className="text-white/[0.08] select-none">•</span>
-            <span className="cursor-pointer hover:text-white transition-colors duration-300">ESTD 2026</span>
-          </div>
+     
 
         </div>
 

@@ -104,9 +104,7 @@ const PAYMENT_METHODS = [
   { id: "Card", label: "Card", icon: FiCreditCard },
 ];
 
-/* ------------------------------------------------------------------ */
-/*  Small presentational helpers                                      */
-/* ------------------------------------------------------------------ */
+
 
 const HeroStat = ({ label, value, icon: Icon }) => (
   <div>
@@ -214,7 +212,6 @@ const RenewMember = () => {
   useEffect(() => {
     fetchMember();
     fetchPlans();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleRenew = async () => {
@@ -405,16 +402,7 @@ const planTypes = [
     setPlanType(planTypes[0]);
   }
 }, [planTypes, planType]);
-// useEffect(() => {
-//   if (filteredPlans.length > 0) {
-//     setSelectedPlan(filteredPlans[0]);
-//     setAmountPaid(
-//       filteredPlans[0].finalPrice || 0
-//     );
-//   } else {
-//     setSelectedPlan(null);
-//   }
-// }, [filteredPlans]);
+
 useEffect(() => {
 
   const exists =
@@ -527,7 +515,6 @@ useEffect(() => {
         }
       />
 
-      {/* ============== Membership Hero Card (signature element) ============== */}
       <div className="relative rounded-2xl bg-[var(--ink)] overflow-hidden rh-rise">
         <div className="absolute inset-0 rh-grid-fade pointer-events-none" />
         <div className="absolute inset-0 rh-card-glow pointer-events-none" />
@@ -594,8 +581,6 @@ year:"numeric"
         </div>
       </div>
 
-      {/* ============== Plan Selection ============== */}
-  {/* ============== Plan Selection ============== */}
       <div className="rh-rise" style={{ animationDelay: "60ms" }}>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-4">
           <div>
@@ -699,7 +684,6 @@ year:"numeric"
                   )}
                 </div>
 
-                {/* Features preview */}
                 {plan.features?.length > 0 && (
                   <div className="mt-3 flex flex-wrap gap-1">
                     {plan.features.slice(0, 2).map((f, i) => (
@@ -730,7 +714,6 @@ year:"numeric"
         )}
       </div>
 
-      {/* ============== Renewal Summary ============== */}
       {selectedPlan && (
         <div
           className="rounded-2xl bg-white border border-[var(--line)] p-7 rh-rise relative overflow-hidden"
@@ -821,7 +804,6 @@ year:"numeric"
 
 )}
 
-      {/* ============== Payment Details ============== */}
    <div
         className="rounded-2xl bg-white border border-[var(--line)] p-7 rh-rise"
         style={{ animationDelay: "140ms" }}
@@ -893,7 +875,6 @@ onChange={(e) =>
             </div>
           </div>
 
-          {/* Payment method */}
           <div>
             <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--text-faint)]">
               Pay with
@@ -941,7 +922,6 @@ onChange={(e) =>
           />
         </div>
 
-        {/* Final action — confirms the renewal for the amount + plan configured above */}
         <div className="mt-7 pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="w-9 h-9 rounded-full bg-[var(--mint-soft)] flex items-center justify-center shrink-0">
@@ -986,7 +966,6 @@ onChange={(e) =>
         </div>
       </div>
 
-      {/* ============== Renewal History ============== */}
       <div
         className="rounded-2xl bg-white border border-[var(--line)] p-7 rh-rise"
         style={{ animationDelay: "180ms" }}
