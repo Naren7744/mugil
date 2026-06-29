@@ -1,4 +1,6 @@
+# ==========================
 # Logs
+# ==========================
 logs
 *.log
 npm-debug.log*
@@ -7,19 +9,57 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# ==========================
+# Dependencies
+# ==========================
 node_modules
+
+# ==========================
+# Build
+# ==========================
 dist
 dist-ssr
+coverage
+
+# ==========================
+# Environment Files (IMPORTANT)
+# ==========================
+.env
+.env.*
+!.env.example
+
+# ==========================
+# Local Config
+# ==========================
 *.local
+
+# ==========================
+# Seed Files
+# ==========================
 seedAdmin.js
 
-# Editor directories and files
+# ==========================
+# Editor Files
+# ==========================
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# ==========================
+# OS Files
+# ==========================
+Thumbs.db
+Desktop.ini
+
+# ==========================
+# Temporary
+# ==========================
+tmp
+temp
