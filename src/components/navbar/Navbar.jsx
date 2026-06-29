@@ -228,7 +228,7 @@ const Navbar = () => {
           MOBILE SIDE DRAWER
       ========================================================== */}
       <div
-  className={`fixed top-0 right-0 z-[998] w-[280px] sm:w-[320px] h-screen overflow-y-auto bg-[#0a0a0a] border-l border-white/[0.05] lg:hidden flex flex-col pt-24 pb-6 px-5 transition-transform duration-300 ease-in-out ${
+  className={`fixed top-0 right-0 z-[1000] w-[280px] sm:w-[320px] h-dvh overflow-y-auto bg-[#0a0a0a] border-l border-white/[0.05] lg:hidden flex flex-col pt-24 pb-6 px-5 transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -254,7 +254,7 @@ const Navbar = () => {
         </div>
 
         {/* DRAWER FOOTER — MOBILE LOGIN */}
-      <div className="mt-8 border-t border-white/[0.05] pt-6 sticky bottom-0 bg-[#0a0a0a]">
+      <div className="mt-8 border-t border-white/[0.05] pt-6">
           <Link to="/adminLogin" className="block w-full">
             <button
               className="
