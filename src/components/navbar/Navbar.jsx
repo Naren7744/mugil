@@ -227,13 +227,13 @@ const Navbar = () => {
       {/* =========================================================
           MOBILE SIDE DRAWER
       ========================================================== */}
-      <div 
-        className={`fixed top-0 right-0 z-[998] w-[280px] sm:w-[320px] h-screen bg-[#0a0a0a] border-l border-white/[0.05] lg:hidden flex flex-col justify-between pt-28 pb-8 px-5 transition-transform duration-300 ease-in-out ${
+      <div
+  className={`fixed top-0 right-0 z-[998] w-[280px] sm:w-[320px] h-screen overflow-y-auto bg-[#0a0a0a] border-l border-white/[0.05] lg:hidden flex flex-col pt-24 pb-6 px-5 transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* NAV LINKS */}
-        <div className="flex flex-col space-y-1">
+        <div className="flex-1 flex flex-col space-y-1">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
             return (
@@ -254,7 +254,7 @@ const Navbar = () => {
         </div>
 
         {/* DRAWER FOOTER — MOBILE LOGIN */}
-        <div className="border-t border-white/[0.05] pt-6">
+      <div className="mt-8 border-t border-white/[0.05] pt-6 sticky bottom-0 bg-[#0a0a0a]">
           <Link to="/adminLogin" className="block w-full">
             <button
               className="
