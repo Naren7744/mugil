@@ -14,16 +14,28 @@ const reportRoutes =
 require("./routes/reportRoutes");
 
 const app = express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://mugil-ruby.vercel.app",
+  "https://mugil-naren444.vercel.app",
+  "https://mugil-8tye9fhgq-naren444.vercel.app",
+];
 
 app.use(express.json());
 
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://mugil-ruby.vercel.app",
-      "https://mugil-naren444.vercel.app",
-    ],
+    origin(origin, callback) {
+      // browser அல்லாத requests (Postman போன்றவை)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
