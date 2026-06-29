@@ -3,7 +3,7 @@ import { FiPlus, FiMinus, FiArrowRight, FiPercent, FiAward, FiShield, FiChevronD
 import { FaCrown, FaDumbbell } from 'react-icons/fa';
 
 // ── Change this to match your backend URL ─────────────────────────────────────
-const API_BASE = '/api/v1';
+import api from "../services/api";
 
 const Membership = () => {
   const [selectedDuration, setSelectedDuration] = useState('1 Month');
@@ -13,18 +13,21 @@ const Membership = () => {
   const [expandedFaq, setExpandedFaq]           = useState(null);
 
   // ── Fetch active plans from backend ────────────────────────────────────────
-  useEffect(() => {
-    fetch(`${API_BASE}/plans/public`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPlans(data.data || []);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Failed to load plans:', err);
-        setLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  const loadPlans = async () => {
+    try {
+      const { data } = await api.get("/plans/public");
+
+      setPlans(data.data || []);
+    } catch (err) {
+      console.error("Failed to load plans:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  loadPlans();
+}, []);
 
   // Filter by selected duration and exclude inactive plans
   const visiblePlans = plans.filter(

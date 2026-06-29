@@ -2,28 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { FiArrowUpRight, FiCheck } from 'react-icons/fi';
 import { FaCrown } from 'react-icons/fa';
 
-const API_BASE = '/api/v1';
+import api from "../../services/api";
 
 const MembershipPlans = () => {
   const [plans, setPlans]   = useState([]);
   const [loading, setLoading] = useState(true);
 
   // ── Fetch 1-Month active plans from backend ──────────────────────────────
-  useEffect(() => {
-    fetch(`${API_BASE}/plans/public`)
-      .then((res) => res.json())
-      .then((data) => {
-        const monthly = (data.data || [])
-          .filter((p) => p.duration === '1 Month' && p.status !== 'Inactive')
-          .sort((a, b) => Number(a.price) - Number(b.price));
-        setPlans(monthly);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Failed to load plans:', err);
-        setLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  const loadPlans = async () => {
+    try {
+      const { data } = await api.get("/plans/public");
+
+      const monthly = (data.data || [])
+        .filter(
+          (p) =>
+            p.duration === "1 Month" &&
+            p.status !== "Inactive"
+        )
+        .sort((a, b) => Number(a.price) - Number(b.price));
+
+      setPlans(monthly);
+    } catch (err) {
+      console.error("Failed to load plans:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  loadPlans();
+}, []);
 
   // Show offer price if available, else regular price
   const displayPrice = (plan) =>
