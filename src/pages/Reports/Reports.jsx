@@ -44,10 +44,10 @@ const COLUMN_LABELS = {
   ownerName:     "Owner",
   branchName:    "Branch Name",
   branchCode:    "Branch Code",
-  totalRevenue:  "Revenue",
+  totalRevenue: "Branch Revenue",
   totalMembers:  "Total Members",
   activeMembers: "Active Members",
-  pendingAmount: "Pending Amount",
+  pendingAmount: "Outstanding Amount",
   status:        "Status",
   amount:        "Amount",
 };
@@ -136,40 +136,23 @@ const METRIC_CARDS = [
 {
   key: "todayCollection",
 
-  label: (period) => {
-    switch (period) {
-      case "today":
-        return "Today's Collection";
+ label: "Collection",
 
-      case "thisMonth":
-        return "This Month Collection";
+sub: (period) => {
+  switch (period) {
+    case "today":
+      return "Today";
 
-      case "last3Months":
-        return "Last 3 Months Collection";
+    case "thisMonth":
+      return "This Month";
 
-      case "overall":
-      default:
-        return "Overall Collection";
-    }
-  },
+    case "last3Months":
+      return "Last 3 Months";
 
-  sub: (period) => {
-    switch (period) {
-      case "today":
-        return "Collected Today";
-
-      case "thisMonth":
-        return "Collected This Month";
-
-      case "last3Months":
-        return "Collected Last 3 Months";
-
-      case "overall":
-      default:
-        return "Overall Collection";
-    }
-  },
-
+    default:
+      return "Overall";
+  }
+},
   icon: <FiDollarSign size={18} />,
   color: "cyan",
   api: "/api/v1/reports/today-collection",
@@ -177,17 +160,17 @@ const METRIC_CARDS = [
   format: "currency",
   type: "today-collection",
 },
-  {
-    key:    "totalRevenue",
-    label:  "Total Revenue",
-    sub:    (m) => `+${m?.newMembers || 0} new members`,
-    icon:   <FiTrendingUp size={18} />,
-    color:  "violet",
-    api:    "/api/v1/reports/branch-revenue",
-    title:  "Total Revenue",
-    format: "currency",
-    type:   "branch-revenue",
-  },
+  // {
+  //   key:    "totalRevenue",
+  //   label:  "Total Revenue",
+  //   sub:    (m) => `+${m?.newMembers || 0} new members`,
+  //   icon:   <FiTrendingUp size={18} />,
+  //   color:  "violet",
+  //   api:    "/api/v1/reports/branch-revenue",
+  //   title:  "Total Revenue",
+  //   format: "currency",
+  //   type:   "branch-revenue",
+  // },
 ];
 
 const COLOR_MAP = {
@@ -254,19 +237,19 @@ const buildSummaryBoxes = (rows, reportType, period = "today") => {
         label_c: [24, 95, 165],  value_c: [12, 68, 124],
       },
       {
-        label: "Total Collected",
+      label: "Collected Amount",
         value: `Rs. ${totalPaid.toLocaleString("en-IN")}`,
         bgColor: [234, 243, 222], border: [151, 196, 89],
         label_c: [59, 109, 17],  value_c: [39, 80, 10],
       },
       {
-        label: "Total Pending",
+      label: "Outstanding Amount",
         value: `Rs. ${totalPending.toLocaleString("en-IN")}`,
         bgColor: [252, 235, 235], border: [240, 149, 149],
         label_c: [163, 45, 45],  value_c: [121, 31, 31],
       },
       {
-        label: "Highest Balance",
+      label: "Highest Due",
         value: `Rs. ${highestBalance.toLocaleString("en-IN")}`,
         bgColor: [250, 238, 218], border: [239, 159, 39],
         label_c: [133, 79, 11],  value_c: [99, 56, 6],
@@ -304,13 +287,13 @@ const activeMembers = rows.filter((member) => {
         label_c: [59, 109, 17],  value_c: [39, 80, 10],
       },
       {
-        label: "Total Collected",
+        label: "Collected Amount",
         value: `Rs. ${totalPaid.toLocaleString("en-IN")}`,
         bgColor: [232, 248, 244], border: [100, 196, 170],
         label_c: [20, 115, 90],  value_c: [10, 80, 60],
       },
       {
-        label: "Total Pending",
+       label: "Outstanding Amount",
         value: `Rs. ${totalPending.toLocaleString("en-IN")}`,
         bgColor: [252, 235, 235], border: [240, 149, 149],
         label_c: [163, 45, 45],  value_c: [121, 31, 31],
@@ -350,13 +333,13 @@ const activeMembers = rows.filter((member) => {
           label_c: [59, 109, 17],  value_c: [39, 80, 10],
         },
         {
-          label: "Total Revenue",
+          label: "Branch Revenue",
           value: `Rs. ${totalRevenue.toLocaleString("en-IN")}`,
           bgColor: [232, 248, 244], border: [100, 196, 170],
           label_c: [20, 115, 90],  value_c: [10, 80, 60],
         },
         {
-          label: "Pending Fees",
+       label: "Outstanding Amount",
           value: `Rs. ${totalPending.toLocaleString("en-IN")}`,
           bgColor: [252, 235, 235], border: [240, 149, 149],
           label_c: [163, 45, 45],  value_c: [121, 31, 31],
@@ -379,13 +362,13 @@ const activeMembers = rows.filter((member) => {
         label_c: [59, 109, 17],  value_c: [39, 80, 10],
       },
       {
-        label: "Total Revenue",
+        label: "Branch Revenue",
         value: `Rs. ${totalRevenue.toLocaleString("en-IN")}`,
         bgColor: [232, 248, 244], border: [100, 196, 170],
         label_c: [20, 115, 90],  value_c: [10, 80, 60],
       },
       {
-        label: "Pending Fees",
+        label: "Outstanding Amount",
         value: `Rs. ${totalPending.toLocaleString("en-IN")}`,
         bgColor: [252, 235, 235], border: [240, 149, 149],
         label_c: [163, 45, 45],  value_c: [121, 31, 31],
@@ -479,15 +462,8 @@ if (reportType === "today-collection") {
       0
     );
 
-  let collectionLabel = "Today's Collection";
+let collectionLabel = "Collection";
 
-  if (period === "thisMonth") {
-    collectionLabel = "This Month Collection";
-  } else if (period === "last3Months") {
-    collectionLabel = "Last 3 Months Collection";
-  }if (period === "overall") {
-    collectionLabel = "Overall Collection";
-}
 
   return [
     {
@@ -538,13 +514,13 @@ if (reportType === "today-collection") {
       label_c: [24, 95, 165],  value_c: [12, 68, 124],
     },
     {
-      label: "Total Collected",
+     label: "Collected Amount",
       value: `Rs. ${totalCollected.toLocaleString("en-IN")}`,
       bgColor: [234, 243, 222], border: [151, 196, 89],
       label_c: [59, 109, 17],  value_c: [39, 80, 10],
     },
     {
-      label: "Total Pending",
+      label: "Outstanding Amount",
       value: `Rs. ${totalBalance.toLocaleString("en-IN")}`,
       bgColor: [252, 235, 235], border: [240, 149, 149],
       label_c: [163, 45, 45],  value_c: [121, 31, 31],
@@ -968,7 +944,7 @@ buildPDF(
         />
 
         {/* ── Summary Cards ──────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {METRIC_CARDS.map((card) => {
             const c = COLOR_MAP[card.color];
             const displayValue = formatMetricValue(card.format, metrics?.[card.key]);

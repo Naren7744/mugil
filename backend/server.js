@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(
   cors({
     origin(origin, callback) {
-      // browser அல்லாத requests (Postman போன்றவை)
+     
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {

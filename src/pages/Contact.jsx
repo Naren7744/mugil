@@ -108,7 +108,7 @@ const Contact = () => {
     {
       icon: <FiMapPin />,
       title: 'Our Address',
-      lines: ['Thattanchavadi,', 'Salem - 636012'],
+      lines: ['Thattanchavadi Karuppur,', 'Salem - 636012'],
     },
     {
       icon: <FiPhone />,
