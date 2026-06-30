@@ -160,17 +160,7 @@ sub: (period) => {
   format: "currency",
   type: "today-collection",
 },
-  // {
-  //   key:    "totalRevenue",
-  //   label:  "Total Revenue",
-  //   sub:    (m) => `+${m?.newMembers || 0} new members`,
-  //   icon:   <FiTrendingUp size={18} />,
-  //   color:  "violet",
-  //   api:    "/api/v1/reports/branch-revenue",
-  //   title:  "Total Revenue",
-  //   format: "currency",
-  //   type:   "branch-revenue",
-  // },
+
 ];
 
 const COLOR_MAP = {
@@ -212,11 +202,6 @@ const ChartTooltip = ({ active, payload, label, prefix = "" }) => {
   );
 };
 
-// ─── PDF Summary Builder (per report type) ────────────────────────────────────
-/**
- * Returns 4 summary box configs based on report type + rows data.
- * Each box: { label, value, bgColor, border, label_c, value_c }
- */
 const buildSummaryBoxes = (rows, reportType, period = "today") => {
   const today = new Date();
 
@@ -264,11 +249,9 @@ const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 const activeMembers = rows.filter((member) => {
-  if (member.status !== "Active") return false;
+    if (!member.expiryDate) return false;
 
-  if (!member.expiryDate) return false;
-
-  return new Date(member.expiryDate) >= today;
+    return new Date(member.expiryDate) >= today;
 }).length;
     const totalPaid      = rows.reduce((s, m) => s + Number(m.amountPaid || 0), 0);
     const totalPending   = rows.reduce((s, m) => s + Number(m.balanceAmount || 0), 0);
@@ -462,7 +445,27 @@ if (reportType === "today-collection") {
       0
     );
 
-let collectionLabel = "Collection";
+let collectionLabel;
+
+switch(period){
+
+case "today":
+collectionLabel="Today's Collection";
+break;
+
+case "thisMonth":
+collectionLabel="This Month Collection";
+break;
+
+case "last3Months":
+collectionLabel="Last 3 Months Collection";
+break;
+
+default:
+collectionLabel="Overall Collection";
+
+}
+
 
 
   return [

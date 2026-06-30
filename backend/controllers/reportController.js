@@ -75,7 +75,7 @@ const getDashboardMetrics = async (req, res) => {
 
     // ================= ACTIVE MEMBERS =================
 const activeMemberList = members.filter(
-  (member) => getMemberStatus(member.expiryDate) === "Active"
+  member => getMemberStatus(member.expiryDate) !== "Expired"
 );
 
 const activeMembers = activeMemberList.length;
@@ -252,7 +252,6 @@ const getChartData = async (req, res) => {
 
         // Revenue
         (member.paymentHistory || []).forEach((payment) => {
-
           
 
           const paymentDate = new Date(payment.paymentDate);
@@ -621,7 +620,7 @@ const getBranchRevenueReport = async (req, res) => {
 
         // ================= ACTIVE MEMBERS =================
 const activeMembers = members.filter(
-    member => getMemberStatus(member.expiryDate) === "Active"
+  member => getMemberStatus(member.expiryDate) !== "Expired"
 );
 
 const finance = calculateFinance(
@@ -671,22 +670,6 @@ const pendingAmount = finance.outstanding;
       message: error.message,
     });
   }
-
-  const finance = calculateFinance(members, period);
-
-console.log("==================================");
-console.log("Branch:", b.branchCode);
-console.log("Period:", period);
-console.log("Revenue:", finance.collection);
-console.log(
-  "Payments:",
-  members.flatMap(m => m.paymentHistory || []).map(p => ({
-    amount: p.amount,
-    date: p.paymentDate,
-    method: p.paymentMethod,
-  }))
-);
-console.log("==================================");
 };
 
 // ─── Active Branches ──────────────────────────────────────────────────────────
@@ -734,7 +717,7 @@ const allMembers = await Member.find({
 }).lean();
 
 const activeMembers = allMembers.filter(
-  (member) => getMemberStatus(member.expiryDate) === "Active"
+  member => getMemberStatus(member.expiryDate) !== "Expired"
 );
 
 

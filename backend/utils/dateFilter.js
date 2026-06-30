@@ -45,7 +45,7 @@ return value >= monthStart &&
 
 case "last3Months":
     return value >= threeMonthStart &&
-           value <= todayEnd;
+       value <= now;
 
     case "overall":
     default:

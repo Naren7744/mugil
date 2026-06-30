@@ -11,7 +11,6 @@ const calculateFinance = (members, period="overall")=>{
     let activeMembers=0;
 
     members.forEach(member=>{
-  console.log("Member:", member.fullName);
 
  const status = getMemberStatus(member.expiryDate);
 
@@ -23,9 +22,7 @@ if (status !== "Expired") {
        if (status !== "Expired") {
     outstanding += Number(member.balanceAmount || 0);
 
-    if (Number(member.balanceAmount || 0) > highestDue) {
-        highestDue = Number(member.balanceAmount || 0);
-    }
+ 
 }
 
 
@@ -62,7 +59,6 @@ if (mode === "cash") {
         });
 
     });
-console.log("Final Collection:", collection);
     return{
 
         activeMembers,
