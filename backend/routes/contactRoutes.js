@@ -12,7 +12,7 @@ const {
 // ==========================================
 // PUBLIC ROUTE
 // ==========================================
-app.get("/mail-test", async (req, res) => {
+router.get("/mail-test", async (req, res) => {
   try {
     const sendEmail = require("./utils/sendEmail");
 
