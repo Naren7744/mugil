@@ -12,7 +12,22 @@ const {
 // ==========================================
 // PUBLIC ROUTE
 // ==========================================
+app.get("/mail-test", async (req, res) => {
+  try {
+    const sendEmail = require("./utils/sendEmail");
 
+    await sendEmail({
+      to: process.env.ADMIN_EMAIL,
+      subject: "Test Mail",
+      html: "<h1>Mail Working</h1>",
+    });
+
+    res.send("Mail Sent");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err.message);
+  }
+});
 // Submit Contact Form
 router.post("/", createContact);
 

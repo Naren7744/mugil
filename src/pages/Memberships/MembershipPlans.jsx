@@ -355,7 +355,7 @@ const handleDeletePlan = async (id) => {
         {/* Total Plans */}
         <div
           onClick={() => setActiveDashboardFilter("ALL")}
-          className={`group bg-white border rounded-[22px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "ALL" ? "border-purple-300 shadow-purple-100" : "border-purple-100/70 hover:border-purple-200"}`}
+          className={`group bg-white border rounded-[14px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "ALL" ? "border-purple-300 shadow-purple-100" : "border-purple-100/70 hover:border-purple-200"}`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="flex items-center gap-3 relative z-10">
@@ -375,7 +375,7 @@ const handleDeletePlan = async (id) => {
         {/* Active Plans */}
         <div
           onClick={() => setActiveDashboardFilter("ACTIVE")}
-          className={`group bg-white border rounded-[22px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "ACTIVE" ? "border-emerald-300 shadow-emerald-100" : "border-emerald-100/70 hover:border-emerald-200"}`}
+          className={`group bg-white border rounded-[14px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "ACTIVE" ? "border-emerald-300 shadow-emerald-100" : "border-emerald-100/70 hover:border-emerald-200"}`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/0 to-emerald-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="flex items-center gap-3 relative z-10">
@@ -395,7 +395,7 @@ const handleDeletePlan = async (id) => {
         {/* Offer Plans */}
         <div
           onClick={() => setActiveDashboardFilter("OFFER")}
-          className={`group bg-white border rounded-[22px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "OFFER" ? "border-amber-300 shadow-amber-100" : "border-amber-100/70 hover:border-amber-200"}`}
+          className={`group bg-white border rounded-[14px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "OFFER" ? "border-amber-300 shadow-amber-100" : "border-amber-100/70 hover:border-amber-200"}`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-amber-50/0 to-amber-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="flex items-center gap-3 relative z-10">
@@ -415,7 +415,7 @@ const handleDeletePlan = async (id) => {
         {/* Inactive Plans */}
         <div
           onClick={() => setActiveDashboardFilter("INACTIVE")}
-          className={`group bg-white border rounded-[22px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "INACTIVE" ? "border-rose-300 shadow-rose-100" : "border-rose-100/70 hover:border-rose-200"}`}
+          className={`group bg-white border rounded-[14px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "INACTIVE" ? "border-rose-300 shadow-rose-100" : "border-rose-100/70 hover:border-rose-200"}`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-rose-50/0 to-rose-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="flex items-center gap-3 relative z-10">
@@ -435,7 +435,7 @@ const handleDeletePlan = async (id) => {
         {/* ── 5th Card: Deleted Plans ─────────────────────────────────────── */}
         <div
           onClick={() => setActiveDashboardFilter("DELETED")}
-          className={`group bg-white border rounded-[22px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "DELETED" ? "border-slate-400 shadow-slate-200" : "border-slate-200/70 hover:border-slate-300"}`}
+          className={`group bg-white border rounded-[14px] p-4 md:p-5 shadow-sm flex flex-col justify-between h-auto md:h-[115px] transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer relative overflow-hidden ${activeDashboardFilter === "DELETED" ? "border-slate-400 shadow-slate-200" : "border-slate-200/70 hover:border-slate-300"}`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-slate-50/0 to-slate-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="flex items-center gap-3 relative z-10">
@@ -466,7 +466,7 @@ const handleDeletePlan = async (id) => {
           </div>
 
           {deletedCount === 0 ? (
-            <div className="text-center py-20 text-slate-400 font-bold text-sm bg-white rounded-[22px] border border-slate-100">
+            <div className="text-center py-20 text-slate-400 font-bold text-sm bg-white rounded-[16px] border border-slate-100">
               No deleted plans found.
             </div>
           ) : (
@@ -474,7 +474,7 @@ const handleDeletePlan = async (id) => {
               {deletedPlans.map((plan) => (
                 <div
                   key={plan._id}
-                  className="relative bg-white border border-slate-200/60 rounded-[24px] p-5 shadow-sm flex flex-col gap-4 opacity-75 hover:opacity-100 transition-all duration-300"
+                  className="relative bg-white border border-slate-200/60 rounded-[20px] p-5 shadow-sm flex flex-col gap-4 opacity-75 hover:opacity-100 transition-all duration-300"
                 >
                   {/* Deleted badge */}
                   <div className="absolute top-4 right-4">
@@ -549,7 +549,7 @@ const handleDeletePlan = async (id) => {
       {/* ── FILTER BAR (hidden in deleted view) ─────────────────────────────── */}
       {!showDeletedView && (
         <>
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6 w-full bg-white p-2 rounded-[16px] border border-slate-100 shadow-sm">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6 w-full bg-white p-2 rounded-[14px] border border-slate-100 shadow-sm">
             <div className="flex items-center bg-slate-50/60 border border-slate-200/60 rounded-[10px] h-[38px] p-0.5 overflow-x-auto hide-scrollbar shrink-0 w-full lg:w-auto">
               {["All Plans", "Weight Gain", "Weight Loss", "Personal Training", "Crossfit", "Others"].map((tab, idx) => {
                 const isActive = activeCategoryTab === tab;
@@ -610,7 +610,7 @@ const handleDeletePlan = async (id) => {
                 <div
                   key={plan.planId}
                   onClick={() => setSelectedPlan(plan)}
-                  className="group relative rounded-[28px] transition-all duration-500 hover:-translate-y-2 cursor-pointer hover:shadow-xl hover:shadow-slate-300/50"
+                  className="group relative rounded-[16px] transition-all duration-500 hover:-translate-y-2 cursor-pointer hover:shadow-xl hover:shadow-slate-300/50"
                 >
                   <div className={`absolute inset-0 rounded-[28px] transition-all duration-500 ${
                     isOffer

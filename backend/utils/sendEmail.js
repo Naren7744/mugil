@@ -1,19 +1,25 @@
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,          // TLS
+  requireTLS: true,
+
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_APP_PASS,
   },
+
+  family: 4, // Force IPv4
 });
 
-// Verify SMTP connection when the server starts
-transporter.verify((error) => {
+// Verify SMTP connection
+transporter.verify((error, success) => {
   if (error) {
-    console.error("Mail Server Error:", error.message);
+    console.error("Mail Server Error:", error);
   } else {
-    console.log("Mail Server Ready");
+    console.log("✅ Mail Server Ready");
   }
 });
 
@@ -26,11 +32,12 @@ const sendEmail = async ({ to, subject, html }) => {
       html,
     });
 
-    console.log(`Email sent to ${to}`);
-    return info;
+    console.log("✅ Email Sent:", info.messageId);
 
+    return info;
   } catch (error) {
-    console.error("Email Error:", error.message);
+    console.error("❌ Email Error:", error);
+
     throw error;
   }
 };
