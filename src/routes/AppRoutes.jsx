@@ -1,16 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
 import AOS from "aos";
-import {
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "../components/common/ScrollToTop";
 /* ================= LAYOUT ================= */
 import MainLayout from "../layouts/MainLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
-
 
 /* ================= PUBLIC PAGES ================= */
 import Home from "../pages/Home";
@@ -23,7 +18,7 @@ import Gallery from "../pages/Gallery";
 /* ================= AUTH ================= */
 import AdminLogin from "../pages/AdminLogin";
 import ProtectedRoute from "../components/ProtectedRoute";
-import ResetPassword from "../pages/Resetpassword"; 
+import ResetPassword from "../pages/Resetpassword";
 
 /* ================= ADMIN DASHBOARD ================= */
 import Dashboard from "../pages/Dashboard/Dashboard";
@@ -41,7 +36,6 @@ import PaymentHistory from "../pages/admin/PaymentHistory";
 import CollectPaymentPage from "../pages/admin/CollectPaymentPage";
 
 function AppRoutes() {
-
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -56,7 +50,6 @@ function AppRoutes() {
       <ScrollToTop />
 
       <Routes>
-
         {/* ================= PUBLIC WEBSITE ================= */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -92,14 +85,16 @@ function AppRoutes() {
           <Route path="branches" element={<BranchManagement />} />
           <Route path="reports" element={<Reports />} />
           <Route path="settings" element={<Settings />} />
-          <Route path="payments/history/:memberId" element={<PaymentHistory />} />
+          <Route
+            path="payments/history/:memberId"
+            element={<PaymentHistory />}
+          />
           <Route path="payments/collect" element={<CollectPaymentPage />} />
           <Route path="payments/collect/:id" element={<CollectPaymentPage />} />
         </Route>
 
         {/* 404 FALLBACK */}
         <Route path="*" element={<Navigate to="/" replace />} />
-
       </Routes>
     </>
   );

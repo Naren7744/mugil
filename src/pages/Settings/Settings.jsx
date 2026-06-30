@@ -2,8 +2,16 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useOutletContext } from "react-router-dom";
 import PageHeader from "../../components/dashboard/PageHeader";
 import {
-  FiBriefcase, FiDollarSign, FiBell, FiSave,
-  FiLock, FiShield, FiGlobe, FiCheckCircle, FiAlertCircle, FiLoader
+  FiBriefcase,
+  FiDollarSign,
+  FiBell,
+  FiSave,
+  FiLock,
+  FiShield,
+  FiGlobe,
+  FiCheckCircle,
+  FiAlertCircle,
+  FiLoader,
 } from "react-icons/fi";
 import api from "../../services/api";
 
@@ -18,9 +26,11 @@ function Toast({ toast }) {
           : "bg-white border-red-200 text-red-600 shadow-red-100"
       }`}
     >
-      {toast.type === "success"
-        ? <FiCheckCircle className="text-emerald-500 text-base shrink-0" />
-        : <FiAlertCircle className="text-red-500 text-base shrink-0" />}
+      {toast.type === "success" ? (
+        <FiCheckCircle className="text-emerald-500 text-base shrink-0" />
+      ) : (
+        <FiAlertCircle className="text-red-500 text-base shrink-0" />
+      )}
       {toast.message}
     </div>
   );
@@ -94,7 +104,11 @@ function Settings() {
   const [activeTab, setActiveTab] = useState("general");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [toast, setToast] = useState({ show: false, type: "success", message: "" });
+  const [toast, setToast] = useState({
+    show: false,
+    type: "success",
+    message: "",
+  });
 
   // ── Form State (mirrors schema exactly) ────────────────────────────────────
   const [gymData, setGymData] = useState({
@@ -141,38 +155,39 @@ function Settings() {
     const fetchSettings = async () => {
       try {
         setLoading(true);
-       const { data } = await api.get("/settings");
+        const { data } = await api.get("/settings");
         if (data.success && data.data) {
           const s = data.data;
           setGymData({
-            gymName:   s.gymName   || "",
-            phone:     s.phone     || "",
-            email:     s.email     || "",
-            gst:       s.gst       || "",
-            currency:  s.currency  || "INR (₹)",
-            timezone:  s.timezone  || "IST (UTC+05:30)",
+            gymName: s.gymName || "",
+            phone: s.phone || "",
+            email: s.email || "",
+            gst: s.gst || "",
+            currency: s.currency || "INR (₹)",
+            timezone: s.timezone || "IST (UTC+05:30)",
           });
           setProfileData({
-            adminName:      s.adminName      || "",
-            adminEmail:     s.adminEmail     || "",
+            adminName: s.adminName || "",
+            adminEmail: s.adminEmail || "",
             sessionTimeout: s.sessionTimeout || 30,
-            twoFactorAuth:  s.twoFactorAuth  ?? true,
+            twoFactorAuth: s.twoFactorAuth ?? true,
           });
           setFinanceData({
-            upiId:          s.upiId          || "",
-            lateFee:        s.lateFee        ?? 0,
-            invoicePrefix:  s.invoicePrefix  || "MF-INV-",
-            gstSlab:        s.gstSlab        ?? 18,
+            upiId: s.upiId || "",
+            lateFee: s.lateFee ?? 0,
+            invoicePrefix: s.invoicePrefix || "MF-INV-",
+            gstSlab: s.gstSlab ?? 18,
             convenienceFee: s.convenienceFee ?? 0,
           });
           if (s.notifications) {
             setNotifications({
-              expiryReminderSMS:   s.notifications.expiryReminderSMS   ?? true,
-              expiryReminderWA:    s.notifications.expiryReminderWA    ?? true,
-              paymentReminderSMS:  s.notifications.paymentReminderSMS  ?? true,
-              paymentReminderEmail:s.notifications.paymentReminderEmail ?? true,
-              welcomeMessageWA:    s.notifications.welcomeMessageWA    ?? true,
-              birthdayWishesWA:    s.notifications.birthdayWishesWA    ?? true,
+              expiryReminderSMS: s.notifications.expiryReminderSMS ?? true,
+              expiryReminderWA: s.notifications.expiryReminderWA ?? true,
+              paymentReminderSMS: s.notifications.paymentReminderSMS ?? true,
+              paymentReminderEmail:
+                s.notifications.paymentReminderEmail ?? true,
+              welcomeMessageWA: s.notifications.welcomeMessageWA ?? true,
+              birthdayWishesWA: s.notifications.birthdayWishesWA ?? true,
             });
           }
         }
@@ -197,7 +212,7 @@ function Settings() {
         ...financeData,
         notifications,
       };
-     const { data } = await api.put("/settings", payload);
+      const { data } = await api.put("/settings", payload);
       if (data.success) {
         showToast("success", "Settings saved successfully.");
       } else {
@@ -216,10 +231,10 @@ function Settings() {
 
   // ── Tabs config ─────────────────────────────────────────────────────────────
   const tabs = [
-    { id: "general",       label: "Gym Details",    icon: <FiBriefcase /> },
-    { id: "identity",      label: "Security",       icon: <FiLock /> },
-    { id: "finance",       label: "Payments & Tax", icon: <FiDollarSign /> },
-    { id: "notifications", label: "Notifications",  icon: <FiBell /> },
+    { id: "general", label: "Gym Details", icon: <FiBriefcase /> },
+    { id: "identity", label: "Security", icon: <FiLock /> },
+    { id: "finance", label: "Payments & Tax", icon: <FiDollarSign /> },
+    { id: "notifications", label: "Notifications", icon: <FiBell /> },
   ];
 
   // ── Render ──────────────────────────────────────────────────────────────────
@@ -238,7 +253,9 @@ function Settings() {
           description="Manage your gym details, security, payments, and notification preferences."
         />
         <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/60 px-4 py-2 rounded-2xl">
-          <span className={`w-2 h-2 rounded-full ${loading ? "bg-amber-400" : "bg-emerald-500 animate-pulse"}`} />
+          <span
+            className={`w-2 h-2 rounded-full ${loading ? "bg-amber-400" : "bg-emerald-500 animate-pulse"}`}
+          />
           <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">
             {loading ? "Loading..." : "All Systems Online"}
           </span>
@@ -247,7 +264,6 @@ function Settings() {
 
       {/* ── Settings Panel ──────────────────────────────────────────────────── */}
       <div className="bg-white border border-slate-200/60 rounded-3xl shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-4 min-h-[650px]">
-
         {/* Sidebar */}
         <div className="md:col-span-1 p-6 flex flex-col justify-between border-r border-slate-100 bg-slate-50/50">
           <div className="space-y-1.5">
@@ -266,7 +282,9 @@ function Settings() {
                       : "text-slate-400 border border-transparent hover:bg-white hover:text-slate-700 hover:shadow-sm hover:border-slate-200/60"
                   }`}
                 >
-                  <span className={`text-base transition-colors duration-200 ${isActive ? "text-indigo-600" : "text-slate-400"}`}>
+                  <span
+                    className={`text-base transition-colors duration-200 ${isActive ? "text-indigo-600" : "text-slate-400"}`}
+                  >
                     {tab.icon}
                   </span>
                   {tab.label}
@@ -301,12 +319,13 @@ function Settings() {
 
         {/* Content Area */}
         <div className="md:col-span-3 p-8 lg:p-12 bg-white">
-
           {/* ── TAB 1: Gym Details ─────────────────────────────────────────── */}
           {activeTab === "general" && (
             <div className="space-y-8 max-w-4xl">
               <div>
-                <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">Gym Details</h3>
+                <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">
+                  Gym Details
+                </h3>
                 <p className="text-sm text-slate-400 mt-1">
                   Update your gym's basic information, currency, and timezone.
                 </p>
@@ -322,7 +341,9 @@ function Settings() {
                       <input
                         type="text"
                         value={gymData.gymName}
-                        onChange={(e) => setGymData({ ...gymData, gymName: e.target.value })}
+                        onChange={(e) =>
+                          setGymData({ ...gymData, gymName: e.target.value })
+                        }
                         placeholder="e.g. Mugil & SP Fitness"
                         className={inputCls}
                       />
@@ -331,7 +352,9 @@ function Settings() {
                       <input
                         type="text"
                         value={gymData.phone}
-                        onChange={(e) => setGymData({ ...gymData, phone: e.target.value })}
+                        onChange={(e) =>
+                          setGymData({ ...gymData, phone: e.target.value })
+                        }
                         placeholder="+91 98765 43210"
                         className={inputCls}
                       />
@@ -340,16 +363,20 @@ function Settings() {
                       <input
                         type="email"
                         value={gymData.email}
-                        onChange={(e) => setGymData({ ...gymData, email: e.target.value })}
+                        onChange={(e) =>
+                          setGymData({ ...gymData, email: e.target.value })
+                        }
                         placeholder="info@mugilfitness.com"
                         className={inputCls}
                       />
                     </Field>
-               
+
                     <Field label="Currency">
                       <select
                         value={gymData.currency}
-                        onChange={(e) => setGymData({ ...gymData, currency: e.target.value })}
+                        onChange={(e) =>
+                          setGymData({ ...gymData, currency: e.target.value })
+                        }
                         className={selectCls}
                       >
                         <option>INR (₹)</option>
@@ -360,7 +387,9 @@ function Settings() {
                     <Field label="Timezone">
                       <select
                         value={gymData.timezone}
-                        onChange={(e) => setGymData({ ...gymData, timezone: e.target.value })}
+                        onChange={(e) =>
+                          setGymData({ ...gymData, timezone: e.target.value })
+                        }
                         className={selectCls}
                       >
                         <option>IST (UTC+05:30)</option>
@@ -376,7 +405,6 @@ function Settings() {
                       <h4 className="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
                         <FiGlobe className="text-indigo-500" /> Branch Locations
                       </h4>
-                    
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {[
@@ -388,8 +416,12 @@ function Settings() {
                           className="p-5 border border-slate-200/60 rounded-2xl bg-slate-50/40 flex justify-between items-center hover:shadow-md hover:border-slate-300 transition-all duration-300"
                         >
                           <div>
-                            <p className="text-sm font-bold text-slate-800">{b.name}</p>
-                            <p className="text-[11px] font-medium text-slate-400 mt-1">{b.sub}</p>
+                            <p className="text-sm font-bold text-slate-800">
+                              {b.name}
+                            </p>
+                            <p className="text-[11px] font-medium text-slate-400 mt-1">
+                              {b.sub}
+                            </p>
                           </div>
                           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-md shadow-emerald-500/40" />
                         </div>
@@ -405,9 +437,12 @@ function Settings() {
           {activeTab === "identity" && (
             <div className="space-y-8 max-w-4xl">
               <div>
-                <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">Security</h3>
+                <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">
+                  Security
+                </h3>
                 <p className="text-sm text-slate-400 mt-1">
-                  Manage your admin login, session settings, and account security.
+                  Manage your admin login, session settings, and account
+                  security.
                 </p>
               </div>
               <div className="h-[1px] w-full bg-slate-100" />
@@ -421,7 +456,12 @@ function Settings() {
                       <input
                         type="text"
                         value={profileData.adminName}
-                        onChange={(e) => setProfileData({ ...profileData, adminName: e.target.value })}
+                        onChange={(e) =>
+                          setProfileData({
+                            ...profileData,
+                            adminName: e.target.value,
+                          })
+                        }
                         placeholder="Enter Your Name"
                         className={inputCls}
                       />
@@ -430,7 +470,12 @@ function Settings() {
                       <input
                         type="email"
                         value={profileData.adminEmail}
-                        onChange={(e) => setProfileData({ ...profileData, adminEmail: e.target.value })}
+                        onChange={(e) =>
+                          setProfileData({
+                            ...profileData,
+                            adminEmail: e.target.value,
+                          })
+                        }
                         placeholder="Enter Your E-Mail"
                         className={inputCls}
                       />
@@ -439,7 +484,10 @@ function Settings() {
                       <select
                         value={profileData.sessionTimeout}
                         onChange={(e) =>
-                          setProfileData({ ...profileData, sessionTimeout: Number(e.target.value) })
+                          setProfileData({
+                            ...profileData,
+                            sessionTimeout: Number(e.target.value),
+                          })
                         }
                         className={selectCls}
                       >
@@ -467,7 +515,10 @@ function Settings() {
                       <Toggle
                         checked={profileData.twoFactorAuth}
                         onChange={() =>
-                          setProfileData({ ...profileData, twoFactorAuth: !profileData.twoFactorAuth })
+                          setProfileData({
+                            ...profileData,
+                            twoFactorAuth: !profileData.twoFactorAuth,
+                          })
                         }
                       />
                     </div>
@@ -476,7 +527,9 @@ function Settings() {
                   {/* Change Password */}
                   <div className="p-5 bg-slate-950 border border-slate-900 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xl">
                     <div>
-                      <span className="text-sm font-bold text-white block">Change Password</span>
+                      <span className="text-sm font-bold text-white block">
+                        Change Password
+                      </span>
                       <span className="text-xs font-mono text-slate-500 tracking-widest block mt-1">
                         Last updated: 3 months ago
                       </span>
@@ -497,7 +550,9 @@ function Settings() {
           {activeTab === "finance" && (
             <div className="space-y-8 max-w-4xl">
               <div>
-                <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">Payments & Tax</h3>
+                <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">
+                  Payments & Tax
+                </h3>
                 <p className="text-sm text-slate-400 mt-1">
                   Set up your UPI, late fees, invoice format, and GST details.
                 </p>
@@ -512,7 +567,12 @@ function Settings() {
                     <input
                       type="text"
                       value={financeData.upiId}
-                      onChange={(e) => setFinanceData({ ...financeData, upiId: e.target.value })}
+                      onChange={(e) =>
+                        setFinanceData({
+                          ...financeData,
+                          upiId: e.target.value,
+                        })
+                      }
                       placeholder="mugilspfitness@upi"
                       className={`${inputCls} font-mono`}
                     />
@@ -522,7 +582,12 @@ function Settings() {
                       type="number"
                       min={0}
                       value={financeData.lateFee}
-                      onChange={(e) => setFinanceData({ ...financeData, lateFee: Number(e.target.value) })}
+                      onChange={(e) =>
+                        setFinanceData({
+                          ...financeData,
+                          lateFee: Number(e.target.value),
+                        })
+                      }
                       className={inputCls}
                     />
                   </Field>
@@ -530,7 +595,12 @@ function Settings() {
                     <input
                       type="text"
                       value={financeData.invoicePrefix}
-                      onChange={(e) => setFinanceData({ ...financeData, invoicePrefix: e.target.value })}
+                      onChange={(e) =>
+                        setFinanceData({
+                          ...financeData,
+                          invoicePrefix: e.target.value,
+                        })
+                      }
                       placeholder="MF-INV-"
                       className={`${inputCls} font-mono`}
                     />
@@ -538,7 +608,12 @@ function Settings() {
                   <Field label="GST Rate">
                     <select
                       value={financeData.gstSlab}
-                      onChange={(e) => setFinanceData({ ...financeData, gstSlab: Number(e.target.value) })}
+                      onChange={(e) =>
+                        setFinanceData({
+                          ...financeData,
+                          gstSlab: Number(e.target.value),
+                        })
+                      }
                       className={selectCls}
                     >
                       <option value={0}>0% — Exempt</option>
@@ -554,7 +629,10 @@ function Settings() {
                       step={0.1}
                       value={financeData.convenienceFee}
                       onChange={(e) =>
-                        setFinanceData({ ...financeData, convenienceFee: Number(e.target.value) })
+                        setFinanceData({
+                          ...financeData,
+                          convenienceFee: Number(e.target.value),
+                        })
                       }
                       className={inputCls}
                     />
@@ -568,9 +646,12 @@ function Settings() {
           {activeTab === "notifications" && (
             <div className="space-y-8 max-w-4xl">
               <div>
-                <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">Notifications</h3>
+                <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">
+                  Notifications
+                </h3>
                 <p className="text-sm text-slate-400 mt-1">
-                  Choose how and when members get notified via SMS, WhatsApp, or Email.
+                  Choose how and when members get notified via SMS, WhatsApp, or
+                  Email.
                 </p>
               </div>
               <div className="h-[1px] w-full bg-slate-100" />
@@ -578,12 +659,14 @@ function Settings() {
               {loading ? (
                 <div className="space-y-4">
                   {[...Array(4)].map((_, i) => (
-                    <div key={i} className="h-20 bg-slate-100 rounded-2xl animate-pulse" />
+                    <div
+                      key={i}
+                      className="h-20 bg-slate-100 rounded-2xl animate-pulse"
+                    />
                   ))}
                 </div>
               ) : (
                 <div className="divide-y divide-slate-100 bg-slate-50/30 border border-slate-200/60 rounded-2xl px-6">
-
                   {/* Expiry Reminder */}
                   <div className="py-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div className="space-y-0.5">
@@ -599,7 +682,9 @@ function Settings() {
                         <input
                           type="checkbox"
                           checked={notifications.expiryReminderSMS}
-                          onChange={() => toggleNotification("expiryReminderSMS")}
+                          onChange={() =>
+                            toggleNotification("expiryReminderSMS")
+                          }
                           className="rounded w-4 h-4 accent-indigo-600"
                         />
                         SMS
@@ -608,7 +693,9 @@ function Settings() {
                         <input
                           type="checkbox"
                           checked={notifications.expiryReminderWA}
-                          onChange={() => toggleNotification("expiryReminderWA")}
+                          onChange={() =>
+                            toggleNotification("expiryReminderWA")
+                          }
                           className="rounded w-4 h-4 accent-indigo-600"
                         />
                         WhatsApp
@@ -631,7 +718,9 @@ function Settings() {
                         <input
                           type="checkbox"
                           checked={notifications.paymentReminderSMS}
-                          onChange={() => toggleNotification("paymentReminderSMS")}
+                          onChange={() =>
+                            toggleNotification("paymentReminderSMS")
+                          }
                           className="rounded w-4 h-4 accent-indigo-600"
                         />
                         SMS
@@ -640,7 +729,9 @@ function Settings() {
                         <input
                           type="checkbox"
                           checked={notifications.paymentReminderEmail}
-                          onChange={() => toggleNotification("paymentReminderEmail")}
+                          onChange={() =>
+                            toggleNotification("paymentReminderEmail")
+                          }
                           className="rounded w-4 h-4 accent-indigo-600"
                         />
                         Email
@@ -655,7 +746,8 @@ function Settings() {
                         Welcome Message for New Members
                       </span>
                       <span className="text-xs text-slate-400 block">
-                        Send a welcome message with membership details when someone joins.
+                        Send a welcome message with membership details when
+                        someone joins.
                       </span>
                     </div>
                     <Toggle
@@ -671,7 +763,8 @@ function Settings() {
                         Birthday Wishes
                       </span>
                       <span className="text-xs text-slate-400 block">
-                        Automatically send a birthday message to members on their special day.
+                        Automatically send a birthday message to members on
+                        their special day.
                       </span>
                     </div>
                     <Toggle
@@ -679,12 +772,10 @@ function Settings() {
                       onChange={() => toggleNotification("birthdayWishesWA")}
                     />
                   </div>
-
                 </div>
               )}
             </div>
           )}
-
         </div>
       </div>
     </div>

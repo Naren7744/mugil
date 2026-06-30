@@ -1,27 +1,27 @@
 const { calculateFinance } = require("./financeSummary");
 
-const buildSummary=(members,period)=>{
+const buildSummary = (members, period) => {
 
-    const finance=calculateFinance(members,period);
+    const finance = calculateFinance(members, period);
 
-    return{
+    return {
 
-        collection:finance.collection,
+        collection: finance.collection,
 
-        outstanding:finance.outstanding,
+        outstanding: finance.outstanding,
 
-        highestDue:finance.highestDue,
+        highestDue: finance.highestDue,
 
-        cash:finance.cash,
+        cash: finance.cash,
 
-        online:finance.online,
+        online: finance.online,
 
-        activeMembers:finance.activeMembers
+        activeMembers: finance.activeMembers
 
     };
 
 };
 
-module.exports={
+module.exports = {
     buildSummary
 };

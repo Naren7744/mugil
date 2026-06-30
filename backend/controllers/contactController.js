@@ -172,111 +172,111 @@ const createContact = async (req, res) => {
     // -------------------------
     // Send Customer Thank You Email
     // -------------------------
-// if (enquiry.email?.trim()) {
-//   try {
-//     await sendEmail({
-//       to: enquiry.email,
-//       subject: "Thank You for Contacting Mugil SP Fitness",
-//       html: `
-//         <!DOCTYPE html>
-//         <html lang="en">
-//         <head>
-//           <meta charset="UTF-8"/>
-//           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-//           <title>Thank You</title>
-//         </head>
-//         <body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Segoe UI',Arial,sans-serif;">
+    // if (enquiry.email?.trim()) {
+    //   try {
+    //     await sendEmail({
+    //       to: enquiry.email,
+    //       subject: "Thank You for Contacting Mugil SP Fitness",
+    //       html: `
+    //         <!DOCTYPE html>
+    //         <html lang="en">
+    //         <head>
+    //           <meta charset="UTF-8"/>
+    //           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    //           <title>Thank You</title>
+    //         </head>
+    //         <body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Segoe UI',Arial,sans-serif;">
 
-//           <table width="100%" cellpadding="0" cellspacing="0" style="background:#f3f4f6;padding:40px 20px;">
-//             <tr>
-//               <td align="center">
-//                 <table width="620" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e5e7eb;">
+    //           <table width="100%" cellpadding="0" cellspacing="0" style="background:#f3f4f6;padding:40px 20px;">
+    //             <tr>
+    //               <td align="center">
+    //                 <table width="620" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e5e7eb;">
 
-//                   <!-- BANNER -->
-//                   <tr>
-//                     <td style="background:#111827;padding:40px 48px 36px;text-align:center;">
-//                       <table cellpadding="0" cellspacing="0" style="margin:0 auto 14px;">
-//                         <tr>
-//                           <td style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:50px;padding:5px 18px;">
-//                             <span style="color:#9ca3af;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Thank You</span>
-//                           </td>
-//                         </tr>
-//                       </table>
-//                       <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:800;letter-spacing:-0.5px;">
-//                         Mugil <span style="color:#34d399;">SP</span> Fitness
-//                       </h1>
-//                       <p style="margin:8px 0 0;color:#6b7280;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Salem, Tamil Nadu</p>
-//                       <table cellpadding="0" cellspacing="0" style="margin:16px auto 0;">
-//                         <tr>
-//                           <td style="background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);border-radius:50px;padding:6px 20px;">
-//                             <span style="color:#34d399;font-size:12px;font-weight:700;">&#10003; Enquiry Received Successfully</span>
-//                           </td>
-//                         </tr>
-//                       </table>
-//                       <div style="height:4px;background:linear-gradient(90deg,#10b981,#3b82f6,#8b5cf6);margin-top:28px;margin-left:-48px;margin-right:-48px;"></div>
-//                     </td>
-//                   </tr>
+    //                   <!-- BANNER -->
+    //                   <tr>
+    //                     <td style="background:#111827;padding:40px 48px 36px;text-align:center;">
+    //                       <table cellpadding="0" cellspacing="0" style="margin:0 auto 14px;">
+    //                         <tr>
+    //                           <td style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:50px;padding:5px 18px;">
+    //                             <span style="color:#9ca3af;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Thank You</span>
+    //                           </td>
+    //                         </tr>
+    //                       </table>
+    //                       <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:800;letter-spacing:-0.5px;">
+    //                         Mugil <span style="color:#34d399;">SP</span> Fitness
+    //                       </h1>
+    //                       <p style="margin:8px 0 0;color:#6b7280;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Salem, Tamil Nadu</p>
+    //                       <table cellpadding="0" cellspacing="0" style="margin:16px auto 0;">
+    //                         <tr>
+    //                           <td style="background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);border-radius:50px;padding:6px 20px;">
+    //                             <span style="color:#34d399;font-size:12px;font-weight:700;">&#10003; Enquiry Received Successfully</span>
+    //                           </td>
+    //                         </tr>
+    //                       </table>
+    //                       <div style="height:4px;background:linear-gradient(90deg,#10b981,#3b82f6,#8b5cf6);margin-top:28px;margin-left:-48px;margin-right:-48px;"></div>
+    //                     </td>
+    //                   </tr>
 
-//                   <!-- BODY -->
-//                   <tr>
-//                     <td style="padding:32px 40px;">
+    //                   <!-- BODY -->
+    //                   <tr>
+    //                     <td style="padding:32px 40px;">
 
-//                       <!-- Greeting -->
-//                       <h2 style="margin:0 0 10px;color:#111827;font-size:19px;font-weight:700;">Hello, ${enquiry.name}!</h2>
-//                       <p style="margin:0;color:#6b7280;font-size:14px;line-height:1.8;">
-//                         Thank you for reaching out to <strong style="color:#111827;">Mugil SP Fitness</strong>. We've received your enquiry and our team will get in touch with you <strong style="color:#111827;">as soon as possible</strong>.
-//                       </p>
+    //                       <!-- Greeting -->
+    //                       <h2 style="margin:0 0 10px;color:#111827;font-size:19px;font-weight:700;">Hello, ${enquiry.name}!</h2>
+    //                       <p style="margin:0;color:#6b7280;font-size:14px;line-height:1.8;">
+    //                         Thank you for reaching out to <strong style="color:#111827;">Mugil SP Fitness</strong>. We've received your enquiry and our team will get in touch with you <strong style="color:#111827;">as soon as possible</strong>.
+    //                       </p>
 
-//                       <!-- Divider -->
-//                       <div style="border-top:1px solid #f3f4f6;margin:24px 0;"></div>
+    //                       <!-- Divider -->
+    //                       <div style="border-top:1px solid #f3f4f6;margin:24px 0;"></div>
 
-//                       <!-- Card -->
-//                       <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:28px;">
-//                         <div style="font-size:32px;margin-bottom:14px;">&#128236;</div>
-//                         <h3 style="margin:0 0 10px;color:#111827;font-size:17px;font-weight:700;">We'll be in touch soon!</h3>
-//                         <p style="margin:0 0 22px;color:#6b7280;font-size:14px;line-height:1.8;">
-//                           Our team will call you shortly to discuss your fitness goals and help you get started on your transformation journey.
-//                         </p>
-//                         <table cellpadding="0" cellspacing="0">
-//                           <tr>
-//                             <td style="background:#111827;border-radius:50px;padding:11px 26px;">
-//                               <span style="color:#ffffff;font-size:13px;font-weight:700;">&#128222; Expect a callback soon</span>
-//                             </td>
-//                           </tr>
-//                         </table>
-//                       </div>
+    //                       <!-- Card -->
+    //                       <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:28px;">
+    //                         <div style="font-size:32px;margin-bottom:14px;">&#128236;</div>
+    //                         <h3 style="margin:0 0 10px;color:#111827;font-size:17px;font-weight:700;">We'll be in touch soon!</h3>
+    //                         <p style="margin:0 0 22px;color:#6b7280;font-size:14px;line-height:1.8;">
+    //                           Our team will call you shortly to discuss your fitness goals and help you get started on your transformation journey.
+    //                         </p>
+    //                         <table cellpadding="0" cellspacing="0">
+    //                           <tr>
+    //                             <td style="background:#111827;border-radius:50px;padding:11px 26px;">
+    //                               <span style="color:#ffffff;font-size:13px;font-weight:700;">&#128222; Expect a callback soon</span>
+    //                             </td>
+    //                           </tr>
+    //                         </table>
+    //                       </div>
 
-//                       <!-- Quote -->
-//                       <div style="margin-top:16px;border:1px solid #e5e7eb;border-radius:12px;padding:22px 24px;">
-//                         <p style="margin:0 0 8px;color:#111827;font-size:14px;font-weight:700;font-style:italic;line-height:1.6;">"Every champion was once a contender that refused to give up."</p>
-//                         <p style="margin:0;color:#9ca3af;font-size:12px;">&#127942; Your transformation starts today.</p>
-//                       </div>
+    //                       <!-- Quote -->
+    //                       <div style="margin-top:16px;border:1px solid #e5e7eb;border-radius:12px;padding:22px 24px;">
+    //                         <p style="margin:0 0 8px;color:#111827;font-size:14px;font-weight:700;font-style:italic;line-height:1.6;">"Every champion was once a contender that refused to give up."</p>
+    //                         <p style="margin:0;color:#9ca3af;font-size:12px;">&#127942; Your transformation starts today.</p>
+    //                       </div>
 
-//                     </td>
-//                   </tr>
+    //                     </td>
+    //                   </tr>
 
-//                   <!-- FOOTER -->
-//                   <tr>
-//                     <td style="background:#f3f4f6;border-top:1px solid #e5e7eb;padding:22px 40px;text-align:center;">
-//                       <p style="margin:0;color:#111827;font-size:13px;font-weight:700;">Mugil SP Fitness</p>
-//                       <p style="margin:4px 0 0;color:#9ca3af;font-size:12px;">Salem, Tamil Nadu &nbsp;|&nbsp; &#128222; +91 80987 12009</p>
-//                       <p style="margin:10px 0 0;color:#d1d5db;font-size:11px;">This is an automated email. Please do not reply.</p>
-//                     </td>
-//                   </tr>
+    //                   <!-- FOOTER -->
+    //                   <tr>
+    //                     <td style="background:#f3f4f6;border-top:1px solid #e5e7eb;padding:22px 40px;text-align:center;">
+    //                       <p style="margin:0;color:#111827;font-size:13px;font-weight:700;">Mugil SP Fitness</p>
+    //                       <p style="margin:4px 0 0;color:#9ca3af;font-size:12px;">Salem, Tamil Nadu &nbsp;|&nbsp; &#128222; +91 80987 12009</p>
+    //                       <p style="margin:10px 0 0;color:#d1d5db;font-size:11px;">This is an automated email. Please do not reply.</p>
+    //                     </td>
+    //                   </tr>
 
-//                 </table>
-//               </td>
-//             </tr>
-//           </table>
+    //                 </table>
+    //               </td>
+    //             </tr>
+    //           </table>
 
-//         </body>
-//         </html>
-//       `,
-//     });
-//   } catch (mailError) {
-//     console.error("Customer Email Error:", mailError.message);
-//   }
-// }
+    //         </body>
+    //         </html>
+    //       `,
+    //     });
+    //   } catch (mailError) {
+    //     console.error("Customer Email Error:", mailError.message);
+    //   }
+    // }
 
     return res.status(201).json({
       success: true,

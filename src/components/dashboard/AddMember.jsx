@@ -11,9 +11,10 @@ import {
 } from "react-icons/fi";
 
 function AddMember() {
-  const generatedId = `MF${String(
-    Math.floor(Math.random() * 999)
-  ).padStart(3, "0")}`;
+  const generatedId = `MF${String(Math.floor(Math.random() * 999)).padStart(
+    3,
+    "0",
+  )}`;
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -49,14 +50,10 @@ function AddMember() {
 
   return (
     <div className="space-y-6">
-
       {/* HEADER */}
       <div className="bg-white border border-slate-200 rounded-[32px] p-8">
-
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-
           <div>
-
             <p className="text-violet-600 uppercase tracking-[3px] text-xs font-bold">
               Membership Registration
             </p>
@@ -64,52 +61,32 @@ function AddMember() {
             <h1 className="text-3xl font-bold text-slate-900 mt-2">
               Add New Member
             </h1>
-
           </div>
 
           <div className="mt-5 lg:mt-0">
-
             <span className="px-5 py-3 rounded-2xl bg-violet-100 text-violet-600 font-bold">
               ID : {generatedId}
             </span>
-
           </div>
-
         </div>
-
       </div>
 
       <div className="grid xl:grid-cols-3 gap-6">
-
-        {/* FORM */}
         <form
           onSubmit={handleSubmit}
           className="xl:col-span-2 bg-white border border-slate-200 rounded-[32px] p-8"
         >
-
-          {/* PHOTO */}
           <div className="mb-8">
-
             <div className="w-28 h-28 rounded-[28px] bg-slate-100 flex items-center justify-center">
-
               <FiCamera className="text-3xl text-slate-500" />
-
             </div>
 
-            <input
-              type="file"
-              className="mt-4 text-sm"
-            />
-
+            <input type="file" className="mt-4 text-sm" />
           </div>
 
-          {/* PERSONAL INFO */}
-          <h3 className="text-lg font-bold mb-5">
-            Personal Information
-          </h3>
+          <h3 className="text-lg font-bold mb-5">Personal Information</h3>
 
           <div className="grid md:grid-cols-2 gap-5">
-
             <InputField
               icon={<FiUser />}
               name="fullName"
@@ -141,16 +118,13 @@ function AddMember() {
               value={formData.address}
               onChange={handleChange}
             />
-
           </div>
 
-          {/* MEMBERSHIP */}
           <h3 className="text-lg font-bold mt-10 mb-5">
             Membership Information
           </h3>
 
           <div className="grid md:grid-cols-2 gap-5">
-
             <select
               name="branch"
               value={formData.branch}
@@ -192,16 +166,11 @@ function AddMember() {
               <option>Paid</option>
               <option>Pending</option>
             </select>
-
           </div>
 
-          {/* BODY METRICS */}
-          <h3 className="text-lg font-bold mt-10 mb-5">
-            Body Metrics
-          </h3>
+          <h3 className="text-lg font-bold mt-10 mb-5">Body Metrics</h3>
 
           <div className="grid md:grid-cols-3 gap-5">
-
             <InputField
               icon={<FiActivity />}
               name="weight"
@@ -225,16 +194,11 @@ function AddMember() {
               value={formData.bodyFat}
               onChange={handleChange}
             />
-
           </div>
 
-          {/* EMERGENCY */}
-          <h3 className="text-lg font-bold mt-10 mb-5">
-            Emergency Contact
-          </h3>
+          <h3 className="text-lg font-bold mt-10 mb-5">Emergency Contact</h3>
 
           <div className="grid md:grid-cols-2 gap-5">
-
             <InputField
               icon={<FiUser />}
               name="emergencyName"
@@ -250,12 +214,9 @@ function AddMember() {
               value={formData.emergencyPhone}
               onChange={handleChange}
             />
-
           </div>
 
-          {/* NOTES */}
           <div className="mt-8">
-
             <textarea
               name="notes"
               rows="5"
@@ -271,10 +232,8 @@ function AddMember() {
                 outline-none
               "
             />
-
           </div>
 
-          {/* BUTTON */}
           <button
             type="submit"
             className="
@@ -293,83 +252,47 @@ function AddMember() {
               gap-2
             "
           >
-
             <FiSave />
-
             Save Member
-
           </button>
-
         </form>
 
-        {/* SUMMARY CARD */}
         <div className="space-y-6">
-
           <div className="bg-white border border-slate-200 rounded-[32px] p-8">
-
             <h3 className="text-xl font-bold text-slate-900 mb-6">
               Membership Summary
             </h3>
 
             <div className="space-y-5">
+              <SummaryItem label="Member ID" value={generatedId} />
 
-              <SummaryItem
-                label="Member ID"
-                value={generatedId}
-              />
+              <SummaryItem label="Branch" value={formData.branch} />
 
-              <SummaryItem
-                label="Branch"
-                value={formData.branch}
-              />
+              <SummaryItem label="Plan" value={formData.membership} />
 
-              <SummaryItem
-                label="Plan"
-                value={formData.membership}
-              />
-
-              <SummaryItem
-                label="Payment"
-                value={formData.paymentStatus}
-              />
-
+              <SummaryItem label="Payment" value={formData.paymentStatus} />
             </div>
-
           </div>
 
           <div className="bg-gradient-to-br from-violet-600 to-blue-600 rounded-[32px] p-8 text-white">
-
             <FiCreditCard className="text-4xl mb-5" />
 
-            <h3 className="text-2xl font-bold">
-              Premium Membership
-            </h3>
+            <h3 className="text-2xl font-bold">Premium Membership</h3>
 
             <p className="mt-3 text-white/80">
-              Create member profile, assign plan,
-              track attendance and monitor progress.
+              Create member profile, assign plan, track attendance and monitor
+              progress.
             </p>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 }
 
-function InputField({
-  icon,
-  name,
-  placeholder,
-  value,
-  onChange,
-}) {
+function InputField({ icon, name, placeholder, value, onChange }) {
   return (
     <div className="relative">
-
       <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
         {icon}
       </div>
@@ -392,7 +315,6 @@ function InputField({
           focus:border-violet-500
         "
       />
-
     </div>
   );
 }
@@ -401,9 +323,7 @@ function SummaryItem({ label, value }) {
   return (
     <div className="flex justify-between border-b border-slate-100 pb-3">
       <span className="text-slate-500">{label}</span>
-      <span className="font-semibold text-slate-900">
-        {value}
-      </span>
+      <span className="font-semibold text-slate-900">{value}</span>
     </div>
   );
 }

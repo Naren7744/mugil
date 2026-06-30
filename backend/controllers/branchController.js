@@ -2,9 +2,7 @@ const Branch = require("../models/Branch");
 const mongoose = require("mongoose");
 const Member = require("../models/Member");
 
-/* =================================
-   CREATE BRANCH
-================================= */
+
 const createBranch = async (req, res) => {
   try {
     const {
@@ -14,57 +12,57 @@ const createBranch = async (req, res) => {
       ownerName,
     } = req.body;
 
-  if (
-  !branchId ||
-  !branchName ||
-  !branchCode ||
-  !ownerName
-) {
-  return res.status(400).json({
-    success: false,
-    message:
-      "Branch ID, Name, Code and Owner Name are required",
-  });
-}
+    if (
+      !branchId ||
+      !branchName ||
+      !branchCode ||
+      !ownerName
+    ) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Branch ID, Name, Code and Owner Name are required",
+      });
+    }
 
-req.body.branchId =
-  req.body.branchId.trim().toUpperCase();
+    req.body.branchId =
+      req.body.branchId.trim().toUpperCase();
 
-req.body.branchCode =
-  req.body.branchCode.trim().toUpperCase();
+    req.body.branchCode =
+      req.body.branchCode.trim().toUpperCase();
 
-  req.body.branchName =
-  req.body.branchName.trim();
+    req.body.branchName =
+      req.body.branchName.trim();
 
-  req.body.ownerName =
-  req.body.ownerName.trim();
+    req.body.ownerName =
+      req.body.ownerName.trim();
 
- const existingBranch =
-  await Branch.findOne({
-    isDeleted: false,
-    $or: [
-      {
-        branchId: req.body.branchId,
-      },
-      {
-        branchCode: req.body.branchCode,
-      },
-      {
-        branchName: {
-    $regex: `^${req.body.branchName}$`,
-    $options: "i",
-  },
-      },
-    ],
-  });
+    const existingBranch =
+      await Branch.findOne({
+        isDeleted: false,
+        $or: [
+          {
+            branchId: req.body.branchId,
+          },
+          {
+            branchCode: req.body.branchCode,
+          },
+          {
+            branchName: {
+              $regex: `^${req.body.branchName}$`,
+              $options: "i",
+            },
+          },
+        ],
+      });
 
-if (existingBranch) {
-  return res.status(400).json({
-    success: false,
-    message:
-      "Branch ID, Branch Code or Branch Name already exists",
-  });
-}
+    if (existingBranch) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Branch ID, Branch Code or Branch Name already exists",
+      });
+    }
 
     const branch =
       await Branch.create(req.body);
@@ -85,67 +83,65 @@ if (existingBranch) {
   }
 };
 
-/* =================================
-   GET ALL BRANCHES
-================================= */
+
 const getAllBranches = async (
   req,
   res
 ) => {
   try {
     const period =
-  req.query.period ||
-  "thisMonth";
+      req.query.period ||
+      "thisMonth";
 
-let startDate =
-  new Date();
-  let endDate = null;
+    let startDate =
+      new Date();
+    let endDate = null;
 
-  if (
-  period === "thisMonth"
-) {
+    if (
+      period === "thisMonth"
+    ) {
 
-  startDate =
-    new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      1
-    );
+      startDate =
+        new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          1
+        );
 
-}
+    }
 
-if (
-  period === "lastMonth"
-) {
+    if (
+      period === "lastMonth"
+    ) {
 
-  startDate =
-    new Date(
-      new Date().getFullYear(),
-      new Date().getMonth() - 1,
-      1
-    );
+      startDate =
+        new Date(
+          new Date().getFullYear(),
+          new Date().getMonth() - 1,
+          1
+        );
 
-  endDate =
-    new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      1
-    );
+      endDate =
+        new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          1
+        );
 
-}
+    }
 
-if (
-  period === "last3Months"
-) {
+    if (
+      period === "last3Months"
+    ) {
 
-  startDate =
-    new Date();
+      startDate =
+        new Date();
 
-  startDate.setMonth(
-    startDate.getMonth() - 3
-  );
+      startDate.setMonth(
+        startDate.getMonth() - 3
+      );
 
-}
+    }
 
     const branches =
       await Branch.find({
@@ -160,65 +156,65 @@ if (
         branches.map(
           async (branch) => {
 
-const memberFilter = {
-  branch: branch.branchCode,
-  status: {
-    $ne: "Inactive",
-  },
-};
+            const memberFilter = {
+              branch: branch.branchCode,
+              status: {
+                $ne: "Inactive",
+              },
+            };
 
 
 
-const totalMembers =
-  await Member.countDocuments(
-    memberFilter
-  );
+            const totalMembers =
+              await Member.countDocuments(
+                memberFilter
+              );
 
-const revenuePipeline = [
-  {
-    $match: memberFilter,
-  },
+            const revenuePipeline = [
+              {
+                $match: memberFilter,
+              },
 
-  {
-    $unwind: "$paymentHistory",
-  },
-];
+              {
+                $unwind: "$paymentHistory",
+              },
+            ];
 
-if (endDate) {
-  revenuePipeline.push({
-    $match: {
-      "paymentHistory.paymentDate": {
-        $gte: startDate,
-        $lt: endDate,
-      },
-    },
-  });
-} else {
-  revenuePipeline.push({
-    $match: {
-      "paymentHistory.paymentDate": {
-        $gte: startDate,
-      },
-    },
-  });
-}
+            if (endDate) {
+              revenuePipeline.push({
+                $match: {
+                  "paymentHistory.paymentDate": {
+                    $gte: startDate,
+                    $lt: endDate,
+                  },
+                },
+              });
+            } else {
+              revenuePipeline.push({
+                $match: {
+                  "paymentHistory.paymentDate": {
+                    $gte: startDate,
+                  },
+                },
+              });
+            }
 
-revenuePipeline.push({
-  $group: {
-    _id: null,
-    totalRevenue: {
-      $sum: "$paymentHistory.amount",
-    },
-  },
-});
+            revenuePipeline.push({
+              $group: {
+                _id: null,
+                totalRevenue: {
+                  $sum: "$paymentHistory.amount",
+                },
+              },
+            });
 
-const revenueData =
-await Member.aggregate(
-  revenuePipeline
-);
-const totalRevenue =
-  revenueData[0]
-    ?.totalRevenue || 0;
+            const revenueData =
+              await Member.aggregate(
+                revenuePipeline
+              );
+            const totalRevenue =
+              revenueData[0]
+                ?.totalRevenue || 0;
             return {
               ...branch.toObject(),
 
@@ -250,26 +246,24 @@ const totalRevenue =
 
   }
 };
-/* =================================
-   GET SINGLE BRANCH
-================================= */
+
 const getBranchById = async (
-    
+
   req,
   res
 ) => {
   try {
 
     if (
-  !mongoose.Types.ObjectId.isValid(
-    req.params.id
-  )
-) {
-  return res.status(400).json({
-    success: false,
-    message: "Invalid Branch ID",
-  });
-}
+      !mongoose.Types.ObjectId.isValid(
+        req.params.id
+      )
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid Branch ID",
+      });
+    }
     const branch =
       await Branch.findOne({
         _id: req.params.id,
@@ -298,24 +292,22 @@ const getBranchById = async (
   }
 };
 
-/* =================================
-   UPDATE BRANCH
-================================= */
+
 const updateBranch = async (
   req,
   res
 ) => {
   try {
     if (
-  !mongoose.Types.ObjectId.isValid(
-    req.params.id
-  )
-) {
-  return res.status(400).json({
-    success: false,
-    message: "Invalid Branch ID",
-  });
-}
+      !mongoose.Types.ObjectId.isValid(
+        req.params.id
+      )
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid Branch ID",
+      });
+    }
     const branch =
       await Branch.findOne({
         _id: req.params.id,
@@ -332,54 +324,54 @@ const updateBranch = async (
 
 
     if (req.body.branchName) {
-          req.body.branchName =
-    req.body.branchName.trim();
-const existingName =
-  await Branch.findOne({
-    branchName: {
-      $regex: `^${req.body.branchName}$`,
-      $options: "i",
-    },
-      _id: {
-        $ne: req.params.id,
-      },
-      isDeleted: false,
-    });
+      req.body.branchName =
+        req.body.branchName.trim();
+      const existingName =
+        await Branch.findOne({
+          branchName: {
+            $regex: `^${req.body.branchName}$`,
+            $options: "i",
+          },
+          _id: {
+            $ne: req.params.id,
+          },
+          isDeleted: false,
+        });
 
-  if (existingName) {
-    return res.status(400).json({
-      success: false,
-      message:
-        "Branch Name already exists",
-    });
-  }
-}
+      if (existingName) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Branch Name already exists",
+        });
+      }
+    }
 
-if (req.body.branchCode) {
+    if (req.body.branchCode) {
 
-  req.body.branchCode =
-    req.body.branchCode
-      .trim()
-      .toUpperCase();
+      req.body.branchCode =
+        req.body.branchCode
+          .trim()
+          .toUpperCase();
 
-  const existingCode =
-    await Branch.findOne({
-      branchCode:
-        req.body.branchCode,
-      _id: {
-        $ne: req.params.id,
-      },
-      isDeleted: false,
-    });
+      const existingCode =
+        await Branch.findOne({
+          branchCode:
+            req.body.branchCode,
+          _id: {
+            $ne: req.params.id,
+          },
+          isDeleted: false,
+        });
 
-  if (existingCode) {
-    return res.status(400).json({
-      success: false,
-      message:
-        "Branch Code already exists",
-    });
-  }
-}
+      if (existingCode) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Branch Code already exists",
+        });
+      }
+    }
     Object.assign(
       branch,
       req.body
@@ -403,24 +395,22 @@ if (req.body.branchCode) {
   }
 };
 
-/* =================================
-   DELETE BRANCH (SOFT DELETE)
-================================= */
+
 const deleteBranch = async (
   req,
   res
 ) => {
   try {
     if (
-  !mongoose.Types.ObjectId.isValid(
-    req.params.id
-  )
-) {
-  return res.status(400).json({
-    success: false,
-    message: "Invalid Branch ID",
-  });
-}
+      !mongoose.Types.ObjectId.isValid(
+        req.params.id
+      )
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid Branch ID",
+      });
+    }
     const branch =
       await Branch.findOneAndUpdate(
         {
@@ -460,9 +450,7 @@ const deleteBranch = async (
   }
 };
 
-/* =================================
-   BRANCH STATS
-================================= */
+
 const getBranchStats = async (
   req,
   res
@@ -474,64 +462,64 @@ const getBranchStats = async (
         isDeleted: false,
       });
 
-const totalBranches =
-  req.query.branch &&
-  req.query.branch !==
-    "ALL_BRANCHES"
-    ? 1
-    : branches.length;
+    const totalBranches =
+      req.query.branch &&
+        req.query.branch !==
+        "ALL_BRANCHES"
+        ? 1
+        : branches.length;
 
-const activeBranches =
-  req.query.branch &&
-  req.query.branch !==
-    "ALL_BRANCHES"
-    ? 1
-    : branches.filter(
-        (b) =>
-          b.status ===
-          "Active"
-      ).length;
+    const activeBranches =
+      req.query.branch &&
+        req.query.branch !==
+        "ALL_BRANCHES"
+        ? 1
+        : branches.filter(
+          (b) =>
+            b.status ===
+            "Active"
+        ).length;
 
-let memberFilter = {
-  status: {
-    $ne: "Inactive",
-  },
-};
-
-if (
-  req.query.branch &&
-  req.query.branch !==
-    "ALL_BRANCHES"
-) {
-  memberFilter.branch =
-    req.query.branch;
-}
-
-const totalMembers =
-  await Member.countDocuments(
-    memberFilter
-  );
-
-const revenueData = await Member.aggregate([
-  {
-    $match: memberFilter,
-  },
-  {
-    $unwind: "$paymentHistory",
-  },
-  {
-    $group: {
-      _id: null,
-      totalRevenue: {
-        $sum: "$paymentHistory.amount",
+    let memberFilter = {
+      status: {
+        $ne: "Inactive",
       },
-    },
-  },
-]);
+    };
 
-const totalRevenue =
-  revenueData[0]
-    ?.totalRevenue || 0;
+    if (
+      req.query.branch &&
+      req.query.branch !==
+      "ALL_BRANCHES"
+    ) {
+      memberFilter.branch =
+        req.query.branch;
+    }
+
+    const totalMembers =
+      await Member.countDocuments(
+        memberFilter
+      );
+
+    const revenueData = await Member.aggregate([
+      {
+        $match: memberFilter,
+      },
+      {
+        $unwind: "$paymentHistory",
+      },
+      {
+        $group: {
+          _id: null,
+          totalRevenue: {
+            $sum: "$paymentHistory.amount",
+          },
+        },
+      },
+    ]);
+
+    const totalRevenue =
+      revenueData[0]
+        ?.totalRevenue || 0;
 
     res.status(200).json({
       success: true,
@@ -555,13 +543,13 @@ const totalRevenue =
 
 const getNextBranchCode = async (req, res) => {
   try {
- const branches =
-  await Branch.find({
-    isDeleted: false,
-    branchCode: {
-      $regex: "^BRANCH",
-    },
-  });
+    const branches =
+      await Branch.find({
+        isDeleted: false,
+        branchCode: {
+          $regex: "^BRANCH",
+        },
+      });
 
     let maxNumber = 0;
 
@@ -595,7 +583,7 @@ const getNextBranchCode = async (req, res) => {
 };
 
 module.exports = {
- createBranch,
+  createBranch,
   getAllBranches,
   getBranchById,
   updateBranch,

@@ -9,9 +9,6 @@ const {
   deleteContact,
 } = require("../controllers/contactController");
 
-// ==========================================
-// PUBLIC ROUTE
-// ==========================================
 router.get("/mail-test", async (req, res) => {
   try {
     const sendEmail = require("./utils/sendEmail");
@@ -31,20 +28,14 @@ router.get("/mail-test", async (req, res) => {
 // Submit Contact Form
 router.post("/", createContact);
 
-// ==========================================
-// ADMIN ROUTES
-// ==========================================
 
-// Get All Contact Enquiries
+
 router.get("/", getAllContacts);
 
-// Get Single Contact Enquiry
 router.get("/:id", getContactById);
 
-// Update Contact Status
 router.put("/:id", updateContactStatus);
 
-// Delete Contact Enquiry
 router.delete("/:id", deleteContact);
 
 module.exports = router;

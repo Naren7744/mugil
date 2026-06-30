@@ -51,32 +51,26 @@ exports.forgotPassword = async (req, res) => {
       return res.status(400).json({ message: "Email is required." });
     }
 
-    // Find admin by email (uppercase match — உங்க schema uppercase: true)
     const admin = await Admin.findOne({ email: email.toUpperCase().trim() });
 
-    // Security: don't reveal if email exists or not
     if (!admin) {
       return res.status(200).json({
         message: "If this email is registered, a reset link has been sent.",
       });
     }
 
-    // Generate secure random token
     const resetToken = crypto.randomBytes(32).toString("hex");
     const resetTokenHash = crypto
       .createHash("sha256")
       .update(resetToken)
       .digest("hex");
 
-    // Save hashed token + 15 min expiry
     admin.resetPasswordToken = resetTokenHash;
     admin.resetPasswordExpiry = Date.now() + 15 * 60 * 1000;
     await admin.save();
 
-    // Reset URL — frontend page
     const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
 
-    // Gmail transporter
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -128,7 +122,6 @@ exports.forgotPassword = async (req, res) => {
 };
 
 
-// ── NEW: Reset Password — Verify token and update password ──
 exports.resetPassword = async (req, res) => {
   try {
     const { token } = req.params;
@@ -138,13 +131,11 @@ exports.resetPassword = async (req, res) => {
       return res.status(400).json({ message: "Password must be at least 6 characters." });
     }
 
-    // Hash the token from URL to match stored hash
     const tokenHash = crypto
       .createHash("sha256")
       .update(token)
       .digest("hex");
 
-    // Find admin with valid token that hasn't expired
     const admin = await Admin.findOne({
       resetPasswordToken: tokenHash,
       resetPasswordExpiry: { $gt: Date.now() },
@@ -156,11 +147,8 @@ exports.resetPassword = async (req, res) => {
       });
     }
 
-    // NOTE: Admin schema-ல் pre('save') hook password hash பண்ணுது
-    // அதனால direct assign பண்ணா போதும் — bcrypt manually call தேவையில்லை
     admin.password = newPassword;
 
-    // Clear reset token
     admin.resetPasswordToken = undefined;
     admin.resetPasswordExpiry = undefined;
 

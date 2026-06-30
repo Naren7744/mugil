@@ -12,7 +12,6 @@ const { calculateFinance } = require("../utils/financeSummary");
 const buildMemberFilter = (branch) => {
   const filter = {};
 
-  // Branch Filter
   if (branch && branch !== "ALL_BRANCHES") {
     filter.branch = branch;
   }
@@ -27,7 +26,6 @@ const buildBranchFilter = (branch) => {
     status: "Active",
   };
 
-  // Branch Filter
   if (branch && branch !== "ALL_BRANCHES") {
     filter.branchCode = branch;
   }
@@ -74,24 +72,24 @@ const getDashboardMetrics = async (req, res) => {
     const members = await Member.find(memberFilter).lean();
 
     // ================= ACTIVE MEMBERS =================
-const activeMemberList = members.filter(
-  member => getMemberStatus(member.expiryDate) !== "Expired"
-);
+    const activeMemberList = members.filter(
+      member => getMemberStatus(member.expiryDate) !== "Expired"
+    );
 
-const activeMembers = activeMemberList.length;
+    const activeMembers = activeMemberList.length;
 
-const finance = calculateFinance(
-  members,
-  period
-);
+    const finance = calculateFinance(
+      members,
+      period
+    );
 
-const totalRevenue =
-finance.collection;
+    const totalRevenue =
+      finance.collection;
 
 
 
     const pendingPayments =
-finance.outstanding;
+      finance.outstanding;
 
     // ================= EXPIRING MEMBERS =================
     const expiringMembers = members.filter((member) => {
@@ -112,8 +110,8 @@ finance.outstanding;
     // ================= COLLECTION =================
 
 
-const todayCollection =
-finance.collection;
+    const todayCollection =
+      finance.collection;
 
 
     // ================= NEW MEMBERS =================
@@ -252,7 +250,7 @@ const getChartData = async (req, res) => {
 
         // Revenue
         (member.paymentHistory || []).forEach((payment) => {
-          
+
 
           const paymentDate = new Date(payment.paymentDate);
 
@@ -330,7 +328,7 @@ const getExpiringMembersReport = async (req, res) => {
   try {
     const { branch } = req.query;
 
-   const filter = {};
+    const filter = {};
 
     if (branch && branch !== "ALL_BRANCHES") {
       filter.branch = branch;
@@ -363,7 +361,7 @@ const getExpiringMembersReport = async (req, res) => {
         mobile: member.mobile,
         branch: member.branch,
         expiryDate: member.expiryDate,
-      status: getMemberStatus(member.expiryDate),
+        status: getMemberStatus(member.expiryDate),
       }));
 
     res.status(200).json({
@@ -430,15 +428,15 @@ const getPendingFeesReport = async (req, res) => {
 
     const members = (await Member.find(filter).lean())
       .filter((member) => {
-if (getMemberStatus(member.expiryDate) === "Expired") {
-    return false;
-}
+        if (getMemberStatus(member.expiryDate) === "Expired") {
+          return false;
+        }
 
         if (period === "overall") return true;
 
-return (member.paymentHistory || []).some((payment) =>
-    isDateInPeriod(payment.paymentDate, period)
-);
+        return (member.paymentHistory || []).some((payment) =>
+          isDateInPeriod(payment.paymentDate, period)
+        );
       })
       .sort(
         (a, b) =>
@@ -518,25 +516,25 @@ const getTodayCollectionReport = async (req, res) => {
       (member.paymentHistory || []).forEach((payment) => {
         const paymentDate = new Date(payment.paymentDate);
 
-if (isDateInPeriod(payment.paymentDate, period)) {
+        if (isDateInPeriod(payment.paymentDate, period)) {
 
-    collections.push({
+          collections.push({
 
-        memberId: member.memberId,
-        fullName: member.fullName,
-        mobile: member.mobile,
-        branch: member.branch,
-        paymentDate: payment.paymentDate,
-        paymentMode:
-            payment.paymentMethod ||
-            payment.paymentMode,
-        amount: Number(payment.amount || 0),
+            memberId: member.memberId,
+            fullName: member.fullName,
+            mobile: member.mobile,
+            branch: member.branch,
+            paymentDate: payment.paymentDate,
+            paymentMode:
+              payment.paymentMethod ||
+              payment.paymentMode,
+            amount: Number(payment.amount || 0),
 
-    });
+          });
 
-}
+        }
 
-   
+
       });
     });
 
@@ -546,16 +544,16 @@ if (isDateInPeriod(payment.paymentDate, period)) {
         new Date(a.paymentDate)
     );
 
-   
+
 
     const finance =
-calculateFinance(
-members,
-period
-);
+      calculateFinance(
+        members,
+        period
+      );
 
-const totalCollection =
-finance.collection;
+    const totalCollection =
+      finance.collection;
     res.status(200).json({
       success: true,
       count: collections.length,
@@ -619,19 +617,19 @@ const getBranchRevenueReport = async (req, res) => {
         }).lean();
 
         // ================= ACTIVE MEMBERS =================
-const activeMembers = members.filter(
-  member => getMemberStatus(member.expiryDate) !== "Expired"
-);
+        const activeMembers = members.filter(
+          member => getMemberStatus(member.expiryDate) !== "Expired"
+        );
 
-const finance = calculateFinance(
-    members,
-    period
-);
+        const finance = calculateFinance(
+          members,
+          period
+        );
 
-const totalRevenue = finance.collection;
+        const totalRevenue = finance.collection;
 
-const pendingAmount = finance.outstanding;
-   
+        const pendingAmount = finance.outstanding;
+
 
         return {
           branchCode: b.branchCode,
@@ -712,45 +710,45 @@ const getActiveBranchesReport = async (req, res) => {
 
     const result = await Promise.all(
       branches.map(async (b) => {
-const allMembers = await Member.find({
-  branch: b.branchCode,
-}).lean();
+        const allMembers = await Member.find({
+          branch: b.branchCode,
+        }).lean();
 
-const activeMembers = allMembers.filter(
-  member => getMemberStatus(member.expiryDate) !== "Expired"
-);
+        const activeMembers = allMembers.filter(
+          member => getMemberStatus(member.expiryDate) !== "Expired"
+        );
 
 
 
         // let totalRevenue = 0;
-const finance =
-calculateFinance(
-allMembers,
-period
-);
+        const finance =
+          calculateFinance(
+            allMembers,
+            period
+          );
 
 
-const totalRevenue =
-finance.collection;
+        const totalRevenue =
+          finance.collection;
 
-const pendingAmount =
-finance.outstanding;
+        const pendingAmount =
+          finance.outstanding;
 
 
 
- 
-    return {
-  branchName: b.branchName,
-  branchCode: b.branchCode,
-  ownerName: b.ownerName,
-  status: b.status,
 
-  totalMembers: allMembers.length,
-  activeMembers: activeMembers.length,
+        return {
+          branchName: b.branchName,
+          branchCode: b.branchCode,
+          ownerName: b.ownerName,
+          status: b.status,
 
-  totalRevenue,
-  pendingAmount,
-};
+          totalMembers: allMembers.length,
+          activeMembers: activeMembers.length,
+
+          totalRevenue,
+          pendingAmount,
+        };
       })
     );
 

@@ -31,7 +31,6 @@ const getSettings = async (req, res) => {
 const updateSettings = async (req, res) => {
   try {
     const {
-      // Gym Info
       gymName,
       phone,
       email,
@@ -39,24 +38,20 @@ const updateSettings = async (req, res) => {
       currency,
       timezone,
 
-      // Admin / Security
       adminName,
       adminEmail,
       sessionTimeout,
       twoFactorAuth,
 
-      // Finance
       upiId,
       lateFee,
       invoicePrefix,
       gstSlab,
       convenienceFee,
 
-      // Notifications (nested)
       notifications,
     } = req.body;
 
-    // Build update payload — only include defined fields
     const updatePayload = {};
 
     if (gymName     !== undefined) updatePayload.gymName     = gymName;
@@ -77,7 +72,6 @@ const updateSettings = async (req, res) => {
     if (gstSlab        !== undefined) updatePayload.gstSlab        = Number(gstSlab);
     if (convenienceFee !== undefined) updatePayload.convenienceFee = Number(convenienceFee);
 
-    // Merge notifications object safely
     if (notifications && typeof notifications === "object") {
       const notifFields = [
         "expiryReminderSMS",
@@ -98,8 +92,8 @@ const updateSettings = async (req, res) => {
       {},
       { $set: updatePayload },
       {
-        new: true,       // return updated doc
-        upsert: true,    // create if not found
+        new: true,       
+        upsert: true,    
         runValidators: true,
       }
     );

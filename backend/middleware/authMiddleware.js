@@ -11,7 +11,6 @@ const verifyToken = (req, res, next) => {
       });
     }
 
-    // Expect: Bearer <token>
     const token = authHeader.startsWith("Bearer ")
       ? authHeader.split(" ")[1]
       : authHeader;

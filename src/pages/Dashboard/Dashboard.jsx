@@ -53,7 +53,7 @@ function Dashboard() {
 
   const fetchMembers = async () => {
     try {
-        const res = await api.get("/members");
+      const res = await api.get("/members");
       setMembers(res.data.data || []);
     } catch (error) {
       console.log(error);
@@ -69,9 +69,7 @@ function Dashboard() {
       : members.filter((m) => m.branch === currentBranch);
 
   const filteredMembers = activeBranchMembers.filter((member) =>
-    member.fullName
-      ?.toLowerCase()
-      .includes((searchQuery || "").toLowerCase())
+    member.fullName?.toLowerCase().includes((searchQuery || "").toLowerCase()),
   );
 
   /* ── Helpers ── */
@@ -86,14 +84,14 @@ function Dashboard() {
     currentBranch === "ALL_BRANCHES"
       ? "All Branches"
       : currentBranch === "MUGIL_FITNESS"
-      ? "Mugil Fitness"
-      : "SP Fitness";
+        ? "Mugil Fitness"
+        : "SP Fitness";
 
   /* ── KPI Counts ── */
   const totalMembers = activeBranchMembers.length;
 
   const activeMembers = activeBranchMembers.filter(
-    (m) => m.status === "Active"
+    (m) => m.status === "Active",
   ).length;
 
   const expiringMembers = activeBranchMembers.filter((m) => {
@@ -109,11 +107,11 @@ function Dashboard() {
 
   const monthlyIncome = activeBranchMembers.reduce(
     (total, m) => total + Number(m.amountPaid || 0),
-    0
+    0,
   );
 
   const todayExpiring = activeBranchMembers.filter(
-    (m) => getDaysLeft(m.expiryDate) === 0
+    (m) => getDaysLeft(m.expiryDate) === 0,
   ).length;
 
   const weekExpiring = activeBranchMembers.filter((m) => {
@@ -142,16 +140,25 @@ function Dashboard() {
   const [selectedPeriod, setSelectedPeriod] = useState("month");
 
   const monthlyRevenueData = [
-    "Jan","Feb","Mar","Apr","May","Jun",
-    "Jul","Aug","Sep","Oct","Nov","Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ].map((month, index) => ({
     month,
     revenue: activeBranchMembers
       .filter((m) => {
         const created = new Date(m.createdAt);
         return (
-          created.getFullYear() === currentYear &&
-          created.getMonth() === index
+          created.getFullYear() === currentYear && created.getMonth() === index
         );
       })
       .reduce((total, m) => total + Number(m.amountPaid || 0), 0),
@@ -177,39 +184,33 @@ function Dashboard() {
         month: new Date().getFullYear().toString(),
         revenue: activeBranchMembers.reduce(
           (total, m) => total + Number(m.amountPaid || 0),
-          0
+          0,
         ),
       },
     ],
   };
 
   const revenueData = revenueDataMap[selectedPeriod];
- const peakRevenue =
-  revenueData.length > 0
-    ? Math.max(...revenueData.map((d) => d.revenue))
-    : 0;
+  const peakRevenue =
+    revenueData.length > 0 ? Math.max(...revenueData.map((d) => d.revenue)) : 0;
 
   const expense = Math.round(monthlyIncome * 0.35);
   const netProfit = monthlyIncome - expense;
   const growth = currentBranch === "MUGIL_FITNESS" ? 18.3 : 12.8;
 
   /* ── Pending Payments ── */
-const pendingMembers = filteredMembers
-  .filter(
-    (m) =>
-      Number(m.balanceAmount || 0) > 0 ||
-      m.paymentStatus === "Balance Pending"
-  )
-  .sort(
-    (a, b) =>
-      Number(b.balanceAmount || 0) -
-      Number(a.balanceAmount || 0)
-  )
-  .slice(0, 3);
+  const pendingMembers = filteredMembers
+    .filter(
+      (m) =>
+        Number(m.balanceAmount || 0) > 0 ||
+        m.paymentStatus === "Balance Pending",
+    )
+    .sort((a, b) => Number(b.balanceAmount || 0) - Number(a.balanceAmount || 0))
+    .slice(0, 3);
 
   const totalPendingAmount = pendingMembers.reduce(
     (total, m) => total + Number(m.balanceAmount || 0),
-    0
+    0,
   );
   const pendingCount = pendingMembers.length;
 
@@ -224,25 +225,27 @@ const pendingMembers = filteredMembers
 
   return (
     <div className="space-y-6 text-slate-800 animate-fade-in select-none">
-
       {/* ═══════════════ SUB-HEADER ═══════════════ */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-2 select-none">
         <div>
-          <h2  className="
+          <h2
+            className="
     mt-2
     text-2xl
     md:text-3xl
     admin-heading
     tracking-tight
     text-slate-900
-  ">
+  "
+          >
             Welcome to{" "}
             <span className="bg-gradient-to-r from-violet-600 to-blue-500 bg-clip-text text-transparent">
               {branchLabel}
             </span>
           </h2>
           <p className="text-slate-400 text-xs font-medium mt-1">
-            Real-time fitness operations, member analytics and business insights.
+            Real-time fitness operations, member analytics and business
+            insights.
           </p>
         </div>
 
@@ -260,10 +263,8 @@ const pendingMembers = filteredMembers
       {/* ═══════════════ OVERVIEW ═══════════════ */}
       {activeView === "overview" && (
         <div className="space-y-6">
-
           {/* ── TOP 4 KPI CARDS ── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6 select-none">
-
             {/* Card 1 – Total Members */}
             <div
               onClick={() => navigate("/admin/members?view=ALL")}
@@ -328,7 +329,7 @@ const pendingMembers = filteredMembers
                     Pending Fees
                   </p>
                   <h3 className="text-2xl font-bold text-slate-900 font-mono mt-0.5">
-                     ₹{totalPendingAmount.toLocaleString("en-IN")}
+                    ₹{totalPendingAmount.toLocaleString("en-IN")}
                   </h3>
                 </div>
               </div>
@@ -368,10 +369,9 @@ const pendingMembers = filteredMembers
           </div>
 
           {/* ── 3-COLUMN SECTION ── */}
-      {/* ── 3-COLUMN SECTION (NEW LAYOUT) ── */}
+          {/* ── 3-COLUMN SECTION (NEW LAYOUT) ── */}
           {/* TOP ROW: Revenue Chart (wider left) + Expiry Alerts (narrower right) */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
-
             {/* ── COL SPAN 3: REVENUE CHART ── */}
             <div className="lg:col-span-3 bg-white border border-slate-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
               <div>
@@ -415,9 +415,23 @@ const pendingMembers = filteredMembers
                       margin={{ top: 5, right: 5, left: -15, bottom: 0 }}
                     >
                       <defs>
-                        <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#7c3aed" stopOpacity={0.22} />
-                          <stop offset="100%" stopColor="#7c3aed" stopOpacity={0} />
+                        <linearGradient
+                          id="incomeGradient"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="0%"
+                            stopColor="#7c3aed"
+                            stopOpacity={0.22}
+                          />
+                          <stop
+                            offset="100%"
+                            stopColor="#7c3aed"
+                            stopOpacity={0}
+                          />
                         </linearGradient>
                       </defs>
 
@@ -474,7 +488,9 @@ const pendingMembers = filteredMembers
                   </h4>
                   <button
                     type="button"
-                    onClick={() => navigate("/admin/members/overview?view=EXPIRING")}
+                    onClick={() =>
+                      navigate("/admin/members/overview?view=EXPIRING")
+                    }
                     className="cursor-pointer text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors duration-200 active:scale-95"
                   >
                     View All
@@ -482,18 +498,16 @@ const pendingMembers = filteredMembers
                 </div>
 
                 <div className="space-y-2.5">
-            {filteredMembers
-  .filter((m) => {
-    const d = getDaysLeft(m.expiryDate);
-    return d >= 0 && d <= 7;
-  })
-  .sort(
-    (a, b) =>
-      new Date(a.expiryDate) -
-      new Date(b.expiryDate)
-  )
-  .slice(0, 3)
-  .map((alert, idx) => (
+                  {filteredMembers
+                    .filter((m) => {
+                      const d = getDaysLeft(m.expiryDate);
+                      return d >= 0 && d <= 7;
+                    })
+                    .sort(
+                      (a, b) => new Date(a.expiryDate) - new Date(b.expiryDate),
+                    )
+                    .slice(0, 3)
+                    .map((alert, idx) => (
                       <div
                         key={idx}
                         className="flex items-center justify-between p-3 bg-slate-50/50 border border-slate-100 rounded-xl hover:bg-slate-50 hover:border-slate-200 transition-all duration-200 group"
@@ -523,7 +537,9 @@ const pendingMembers = filteredMembers
                 <span>Total {filteredMembers.length} accounts log</span>
                 <button
                   type="button"
-                  onClick={() => navigate("/admin/members/overview?view=EXPIRING")}
+                  onClick={() =>
+                    navigate("/admin/members/overview?view=EXPIRING")
+                  }
                   className="cursor-pointer text-blue-600 hover:text-blue-700 hover:underline transition-colors duration-200"
                 >
                   View All
@@ -533,11 +549,10 @@ const pendingMembers = filteredMembers
           </div>
 
           {/* BOTTOM ROW: Expired + Expiry Status + Pending — 3 equal compact cards */}
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
-
-          {/* ── EXPIRED MEMBERS ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
+            {/* ── EXPIRED MEMBERS ── */}
             <div
-              onClick={() =>  navigate("/admin/members/overview?view=EXPIRED")}
+              onClick={() => navigate("/admin/members/overview?view=EXPIRED")}
               className="group cursor-pointer bg-white border border-slate-100 border-l-4 border-l-rose-500 rounded-2xl p-5 shadow-sm flex flex-col gap-4 transition-all duration-300 hover:shadow-md hover:shadow-rose-500/5 active:scale-[0.98]"
             >
               {/* Header */}
@@ -558,7 +573,9 @@ const pendingMembers = filteredMembers
               {/* Value row — same bg-slate-50 pill style as Expiring Status rows */}
               <div className="flex flex-col gap-2 flex-1 justify-center">
                 <div className="flex justify-between items-center bg-slate-50 px-3 py-4 rounded-xl border border-slate-100">
-                  <span className="text-xs font-semibold text-slate-500">Total Expired</span>
+                  <span className="text-xs font-semibold text-slate-500">
+                    Total Expired
+                  </span>
                   <span className="font-mono font-black text-3xl text-rose-600 leading-none">
                     {String(expiredMembers).padStart(2, "0")}
                   </span>
@@ -595,19 +612,25 @@ const pendingMembers = filteredMembers
               {/* Rows */}
               <div className="flex flex-col gap-2 flex-1 justify-center">
                 <div className="flex justify-between items-center bg-slate-50 px-3 py-2.5 rounded-xl border border-slate-100 text-xs">
-                  <span className="font-semibold text-slate-500">Today Expiring</span>
+                  <span className="font-semibold text-slate-500">
+                    Today Expiring
+                  </span>
                   <span className="font-mono font-black bg-red-50 text-red-600 px-2.5 py-0.5 rounded-lg border border-red-100 min-w-[36px] text-center">
                     {String(todayExpiring).padStart(2, "0")}
                   </span>
                 </div>
                 <div className="flex justify-between items-center bg-slate-50 px-3 py-2.5 rounded-xl border border-slate-100 text-xs">
-                  <span className="font-semibold text-slate-500">This Week</span>
+                  <span className="font-semibold text-slate-500">
+                    This Week
+                  </span>
                   <span className="font-mono font-black bg-amber-50 text-amber-600 px-2.5 py-0.5 rounded-lg border border-amber-100 min-w-[36px] text-center">
                     {String(weekExpiring).padStart(2, "0")}
                   </span>
                 </div>
                 <div className="flex justify-between items-center bg-slate-50 px-3 py-2.5 rounded-xl border border-slate-100 text-xs">
-                  <span className="font-semibold text-slate-500">This Month</span>
+                  <span className="font-semibold text-slate-500">
+                    This Month
+                  </span>
                   <span className="font-mono font-black bg-violet-50 text-violet-600 px-2.5 py-0.5 rounded-lg border border-violet-100 min-w-[36px] text-center">
                     {String(monthExpiring).padStart(2, "0")}
                   </span>
@@ -647,7 +670,9 @@ const pendingMembers = filteredMembers
                       className="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-xl border border-slate-100 text-xs"
                     >
                       <div>
-                        <p className="font-bold text-slate-800 leading-none">{item.fullName}</p>
+                        <p className="font-bold text-slate-800 leading-none">
+                          {item.fullName}
+                        </p>
                         <p className="text-[9px] font-mono text-red-400 mt-0.5">
                           Balance: ₹{item.balanceAmount}
                         </p>
@@ -659,7 +684,9 @@ const pendingMembers = filteredMembers
                   ))
                 ) : (
                   <div className="flex-1 flex items-center justify-center">
-                    <p className="text-xs text-emerald-600 font-bold">✓ No Pending Payments</p>
+                    <p className="text-xs text-emerald-600 font-bold">
+                      ✓ No Pending Payments
+                    </p>
                   </div>
                 )}
               </div>
@@ -667,87 +694,98 @@ const pendingMembers = filteredMembers
               {/* Footer */}
               <div className="pt-3 border-t border-slate-100 flex justify-between items-center">
                 <div>
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Total Pending</span>
-                  <p className="text-[10px] text-slate-400 mt-0.5">{pendingCount} Members</p>
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                    Total Pending
+                  </span>
+                  <p className="text-[10px] text-slate-400 mt-0.5">
+                    {pendingCount} Members
+                  </p>
                 </div>
                 <span className="text-red-500 font-mono font-black text-sm">
                   ₹{totalPendingAmount.toLocaleString()}
                 </span>
               </div>
             </div>
-
           </div>
 
           {/* ── SHORTCUT ACTIONS FOOTER ── */}
-<div className="bg-white rounded-[10px] p-8 border border-slate-200/50 shadow-sm shadow-slate-100/50 select-none">
-  {/* Header Section */}
-  <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-    <div>
-      <h4 className="text-xs font-black uppercase tracking-[2px] text-slate-900">
-        Operational Control Hub
-      </h4>
-      <p className="text-xs text-slate-400 font-medium mt-1">
-        Quick access shortcuts to core system parameters
-      </p>
-    </div>
-    <div className="self-start sm:self-center flex items-center gap-2 bg-indigo-50/60 px-3 py-1.5 rounded-xl border border-indigo-100/80">
-      <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse" />
-      <span className="text-[10px] font-black uppercase tracking-wider text-indigo-600">
-        Live Actions
-      </span>
-    </div>
-  </div>
+          <div className="bg-white rounded-[10px] p-8 border border-slate-200/50 shadow-sm shadow-slate-100/50 select-none">
+            {/* Header Section */}
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h4 className="text-xs font-black uppercase tracking-[2px] text-slate-900">
+                  Operational Control Hub
+                </h4>
+                <p className="text-xs text-slate-400 font-medium mt-1">
+                  Quick access shortcuts to core system parameters
+                </p>
+              </div>
+              <div className="self-start sm:self-center flex items-center gap-2 bg-indigo-50/60 px-3 py-1.5 rounded-xl border border-indigo-100/80">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse" />
+                <span className="text-[10px] font-black uppercase tracking-wider text-indigo-600">
+                  Live Actions
+                </span>
+              </div>
+            </div>
 
-{/* Cards Grid Architecture */}
-<div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-  {[
-    {
-      name: "Add Member",
-      icon: <FiUserPlus size={18} />,
-      accent: "hover:text-indigo-600 hover:bg-indigo-50/20 hover:border-indigo-200/60 hover:shadow-xl hover:shadow-indigo-500/[0.03]",
-      iconBg: "bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white",
-      action: () => navigate("/admin/members/new"),
-    },
-    {
-      name: "Add Payment",
-      icon: <FiDollarSign size={18} />,
-      accent: "hover:text-amber-600 hover:bg-amber-50/20 hover:border-amber-200/60 hover:shadow-xl hover:shadow-amber-500/[0.03]",
-      iconBg: "bg-amber-50 text-amber-600 group-hover:bg-amber-600 group-hover:text-white",
-      action: () => navigate("/admin/payments/collect"),
-    },
-    {
-      name: "Create Plan",
-      icon: <FiPlusCircle size={18} />,
-      accent: "hover:text-emerald-600 hover:bg-emerald-50/20 hover:border-emerald-200/60 hover:shadow-xl hover:shadow-emerald-500/[0.03]",
-      iconBg: "bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white",
-      action: () => navigate("/admin/membership-plans"),
-    },
-    {
-      name: "Generate Report",
-      icon: <FiFileText size={18} />,
-      accent: "hover:text-rose-600 hover:bg-rose-50/20 hover:border-rose-200/60 hover:shadow-xl hover:shadow-rose-500/[0.03]",
-      iconBg: "bg-rose-50 text-rose-600 group-hover:bg-rose-600 group-hover:text-white",
-      action: () => navigate("/admin/reports"),
-    },
-  ].map((act, index) => (
-    <button
-      key={index}
-      type="button"
-      onClick={act.action}
-      className={`flex flex-col items-center justify-center p-6 bg-white border border-slate-150 rounded-[13px] text-center transition-all duration-300 ease-out group active:scale-[0.96] hover:-translate-y-1 shadow-sm ${act.accent}`}
-    >
-      <div
-        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs border border-transparent ${act.iconBg}`}
-      >
-        {act.icon}
-      </div>
-      <span className="text-[11px] font-black text-slate-500 group-hover:text-slate-900 transition-colors duration-300 mt-4 tracking-wider uppercase">
-        {act.name}
-      </span>
-    </button>
-  ))}
-</div>
-</div>
+            {/* Cards Grid Architecture */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+              {[
+                {
+                  name: "Add Member",
+                  icon: <FiUserPlus size={18} />,
+                  accent:
+                    "hover:text-indigo-600 hover:bg-indigo-50/20 hover:border-indigo-200/60 hover:shadow-xl hover:shadow-indigo-500/[0.03]",
+                  iconBg:
+                    "bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white",
+                  action: () => navigate("/admin/members/new"),
+                },
+                {
+                  name: "Add Payment",
+                  icon: <FiDollarSign size={18} />,
+                  accent:
+                    "hover:text-amber-600 hover:bg-amber-50/20 hover:border-amber-200/60 hover:shadow-xl hover:shadow-amber-500/[0.03]",
+                  iconBg:
+                    "bg-amber-50 text-amber-600 group-hover:bg-amber-600 group-hover:text-white",
+                  action: () => navigate("/admin/payments/collect"),
+                },
+                {
+                  name: "Create Plan",
+                  icon: <FiPlusCircle size={18} />,
+                  accent:
+                    "hover:text-emerald-600 hover:bg-emerald-50/20 hover:border-emerald-200/60 hover:shadow-xl hover:shadow-emerald-500/[0.03]",
+                  iconBg:
+                    "bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white",
+                  action: () => navigate("/admin/membership-plans"),
+                },
+                {
+                  name: "Generate Report",
+                  icon: <FiFileText size={18} />,
+                  accent:
+                    "hover:text-rose-600 hover:bg-rose-50/20 hover:border-rose-200/60 hover:shadow-xl hover:shadow-rose-500/[0.03]",
+                  iconBg:
+                    "bg-rose-50 text-rose-600 group-hover:bg-rose-600 group-hover:text-white",
+                  action: () => navigate("/admin/reports"),
+                },
+              ].map((act, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={act.action}
+                  className={`flex flex-col items-center justify-center p-6 bg-white border border-slate-150 rounded-[13px] text-center transition-all duration-300 ease-out group active:scale-[0.96] hover:-translate-y-1 shadow-sm ${act.accent}`}
+                >
+                  <div
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs border border-transparent ${act.iconBg}`}
+                  >
+                    {act.icon}
+                  </div>
+                  <span className="text-[11px] font-black text-slate-500 group-hover:text-slate-900 transition-colors duration-300 mt-4 tracking-wider uppercase">
+                    {act.name}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>

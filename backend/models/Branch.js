@@ -12,12 +12,12 @@ const branchSchema = new mongoose.Schema(
     },
 
     // Basic Details
- branchName: {
-  type: String,
-  required: true,
-  trim: true,
-  unique: true,
-},
+    branchName: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+    },
 
     branchCode: {
       type: String,
@@ -43,18 +43,18 @@ const branchSchema = new mongoose.Schema(
       trim: true,
     },
 
-mobile: {
-  type: String,
-  trim: true,
-  default: "",
-},
+    mobile: {
+      type: String,
+      trim: true,
+      default: "",
+    },
 
-email: {
-  type: String,
-  default: "",
-  lowercase: true,
-  trim: true,
-},
+    email: {
+      type: String,
+      default: "",
+      lowercase: true,
+      trim: true,
+    },
     // Address
     address: {
       type: String,
@@ -87,15 +87,15 @@ email: {
       default: "",
     },
 
- logo: {
-  type: String,
-  default: "",
-},
+    logo: {
+      type: String,
+      default: "",
+    },
 
-coverImage: {
-  type: String,
-  default: "",
-},
+    coverImage: {
+      type: String,
+      default: "",
+    },
 
     description: {
       type: String,
@@ -139,10 +139,10 @@ coverImage: {
     },
 
     // Display
-color: {
-  type: String,
-  default: "#4d3df7",
-},
+    color: {
+      type: String,
+      default: "#4d3df7",
+    },
 
     // Soft Delete
     isDeleted: {
@@ -151,23 +151,23 @@ color: {
     },
 
     newMembersThisMonth: {
-  type: Number,
-  default: 0,
-},
+      type: Number,
+      default: 0,
+    },
 
-membershipPlans: {
-  type: Number,
-  default: 0,
-},
+    membershipPlans: {
+      type: Number,
+      default: 0,
+    },
 
-establishedDate: {
-  type: Date,
-},
+    establishedDate: {
+      type: Date,
+    },
 
-mapLocation: {
-  type: String,
-  default: "",
-},
+    mapLocation: {
+      type: String,
+      default: "",
+    },
 
     // Audit
     createdBy: {
@@ -180,7 +180,7 @@ mapLocation: {
       default: "Admin",
     },
 
-    
+
   },
   {
     timestamps: true,
@@ -188,7 +188,7 @@ mapLocation: {
 );
 
 module.exports =
-mongoose.model(
-  "Branch",
-  branchSchema
-);
+  mongoose.model(
+    "Branch",
+    branchSchema
+  );

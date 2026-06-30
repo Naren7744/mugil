@@ -8,10 +8,10 @@ require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 const memberRoutes = require("./routes/memberRoutes");
 const contactRoutes = require("./routes/contactRoutes");
-const planRoutes =require("./routes/planRoutes");
-const branchRoutes =require("./routes/branchRoutes");
+const planRoutes = require("./routes/planRoutes");
+const branchRoutes = require("./routes/branchRoutes");
 const reportRoutes =
-require("./routes/reportRoutes");
+  require("./routes/reportRoutes");
 
 const app = express();
 const allowedOrigins = [
@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(
   cors({
     origin(origin, callback) {
-     
+
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
@@ -45,9 +45,9 @@ app.use('/api/v1/auth', authRoutes);
 app.use("/api/v1/members", memberRoutes);
 app.use("/api/v1/contact", contactRoutes);
 
-app.use("/api/v1/plans",planRoutes);
-app.use( "/api/v1/branches",branchRoutes);
-app.use("/api/v1/reports",reportRoutes
+app.use("/api/v1/plans", planRoutes);
+app.use("/api/v1/branches", branchRoutes);
+app.use("/api/v1/reports", reportRoutes
 );
 
 app.use("/api/v1/settings", require("./routes/settingsRoutes"));

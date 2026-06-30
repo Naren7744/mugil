@@ -5,9 +5,8 @@ const {
   adminLogin,
   forgotPassword,
   resetPassword,
-} = require("../controllers/authController"); // உங்க controller path check பண்ணு
+} = require("../controllers/authController"); 
 
-// ── Existing ──
 router.post("/login", adminLogin);
 
 // ── New: Password Reset Flow ──

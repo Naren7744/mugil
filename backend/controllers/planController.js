@@ -270,11 +270,11 @@ const getPlanStats = async (req, res) => {
   try {
     const plans = await Plan.find({ isDeleted: false });
 
-    const totalPlans    = plans.length;
-    const activePlans   = plans.filter((p) => p.status === "Active").length;
-    const offerPlans    = plans.filter((p) => p.status === "Offer").length;
+    const totalPlans = plans.length;
+    const activePlans = plans.filter((p) => p.status === "Active").length;
+    const offerPlans = plans.filter((p) => p.status === "Offer").length;
     const featuredPlans = plans.filter((p) => p.isFeatured).length;
-    const totalRevenue  = plans.reduce((sum, p) => sum + Number(p.revenue || 0), 0);
+    const totalRevenue = plans.reduce((sum, p) => sum + Number(p.revenue || 0), 0);
 
     res.status(200).json({
       success: true,

@@ -200,7 +200,6 @@ const planSchema = new mongoose.Schema(
 }
 );
 
-// Auto Calculate Final Price
 planSchema.pre("save", function () {
 
   switch (this.duration) {

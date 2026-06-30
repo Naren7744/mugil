@@ -25,10 +25,8 @@ function RevenueChart() {
 
   return (
     <div className="bg-white border border-slate-200 rounded-[32px] p-8 shadow-sm">
-
       {/* HEADER */}
       <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between mb-8">
-
         <div>
           <p className="text-violet-600 text-xs uppercase tracking-[3px] font-bold">
             Revenue Analytics
@@ -45,15 +43,10 @@ function RevenueChart() {
 
         {/* STATS */}
         <div className="grid grid-cols-2 gap-4 mt-6 xl:mt-0">
-
           <div className="bg-slate-50 rounded-2xl px-5 py-4">
-            <p className="text-slate-500 text-xs uppercase">
-              Revenue
-            </p>
+            <p className="text-slate-500 text-xs uppercase">Revenue</p>
 
-            <h3 className="text-slate-900 text-2xl font-bold mt-1">
-              ₹2.48L
-            </h3>
+            <h3 className="text-slate-900 text-2xl font-bold mt-1">₹2.48L</h3>
 
             <span className="text-emerald-500 text-xs font-semibold">
               +18.2%
@@ -61,49 +54,31 @@ function RevenueChart() {
           </div>
 
           <div className="bg-slate-50 rounded-2xl px-5 py-4">
-            <p className="text-slate-500 text-xs uppercase">
-              Members
-            </p>
+            <p className="text-slate-500 text-xs uppercase">Members</p>
 
-            <h3 className="text-slate-900 text-2xl font-bold mt-1">
-              1,248
-            </h3>
+            <h3 className="text-slate-900 text-2xl font-bold mt-1">1,248</h3>
 
-            <span className="text-blue-500 text-xs font-semibold">
-              +12.4%
-            </span>
+            <span className="text-blue-500 text-xs font-semibold">+12.4%</span>
           </div>
-
         </div>
-
       </div>
 
       {/* CHARTS */}
       <div className="grid xl:grid-cols-2 gap-8">
-
         {/* Revenue */}
         <div>
-
           <div className="flex items-center justify-between mb-4">
-
-            <h3 className="font-semibold text-slate-800">
-              Monthly Revenue
-            </h3>
+            <h3 className="font-semibold text-slate-800">Monthly Revenue</h3>
 
             <span className="text-xs bg-violet-100 text-violet-600 px-3 py-1 rounded-full font-medium">
               Revenue
             </span>
-
           </div>
 
           <div className="h-[320px]">
-
             <ResponsiveContainer width="100%" height="100%">
-
               <AreaChart data={revenueData}>
-
                 <defs>
-
                   <linearGradient
                     id="revenueGradient"
                     x1="0"
@@ -111,24 +86,12 @@ function RevenueChart() {
                     x2="0"
                     y2="1"
                   >
-                    <stop
-                      offset="5%"
-                      stopColor="#7C3AED"
-                      stopOpacity={0.4}
-                    />
-                    <stop
-                      offset="95%"
-                      stopColor="#7C3AED"
-                      stopOpacity={0}
-                    />
+                    <stop offset="5%" stopColor="#7C3AED" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#7C3AED" stopOpacity={0} />
                   </linearGradient>
-
                 </defs>
 
-                <CartesianGrid
-                  stroke="#E5E7EB"
-                  strokeDasharray="4 4"
-                />
+                <CartesianGrid stroke="#E5E7EB" strokeDasharray="4 4" />
 
                 <XAxis
                   dataKey="month"
@@ -158,40 +121,25 @@ function RevenueChart() {
                   strokeWidth={4}
                   fill="url(#revenueGradient)"
                 />
-
               </AreaChart>
-
             </ResponsiveContainer>
-
           </div>
-
         </div>
 
         {/* Members */}
         <div>
-
           <div className="flex items-center justify-between mb-4">
-
-            <h3 className="font-semibold text-slate-800">
-              Member Growth
-            </h3>
+            <h3 className="font-semibold text-slate-800">Member Growth</h3>
 
             <span className="text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full font-medium">
               Members
             </span>
-
           </div>
 
           <div className="h-[320px]">
-
             <ResponsiveContainer width="100%" height="100%">
-
               <LineChart data={revenueData}>
-
-                <CartesianGrid
-                  stroke="#E5E7EB"
-                  strokeDasharray="4 4"
-                />
+                <CartesianGrid stroke="#E5E7EB" strokeDasharray="4 4" />
 
                 <XAxis
                   dataKey="month"
@@ -224,17 +172,11 @@ function RevenueChart() {
                     fill: "#2563EB",
                   }}
                 />
-
               </LineChart>
-
             </ResponsiveContainer>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 }

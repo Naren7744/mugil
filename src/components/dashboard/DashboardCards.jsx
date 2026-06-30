@@ -49,7 +49,6 @@ function DashboardCards() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-
       {stats.map((item, index) => {
         const Icon = item.icon;
 
@@ -69,11 +68,8 @@ function DashboardCards() {
               duration-300
             "
           >
-
             <div className="flex items-start justify-between">
-
               <div>
-
                 <p className="text-slate-500 text-sm font-medium">
                   {item.title}
                 </p>
@@ -81,7 +77,6 @@ function DashboardCards() {
                 <h2 className="text-4xl font-bold text-slate-900 mt-3">
                   {item.value}
                 </h2>
-
               </div>
 
               <div
@@ -94,17 +89,12 @@ function DashboardCards() {
                   ${item.bg}
                 `}
               >
-                <Icon
-                  className={`text-xl ${item.text}`}
-                />
+                <Icon className={`text-xl ${item.text}`} />
               </div>
-
             </div>
 
             <div className="mt-6 flex items-center justify-between">
-
               <div className="flex items-center gap-2">
-
                 <span
                   className="
                     inline-flex
@@ -122,7 +112,6 @@ function DashboardCards() {
                   <FiArrowUpRight />
                   {item.growth}
                 </span>
-
               </div>
 
               <div
@@ -134,14 +123,10 @@ function DashboardCards() {
                   ${item.color}
                 `}
               />
-
             </div>
-
           </div>
         );
       })}
-
-      {/* Membership Alert Card */}
 
       <div
         className="
@@ -156,11 +141,8 @@ function DashboardCards() {
           shadow-xl
         "
       >
-
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-
           <div>
-
             <p className="uppercase tracking-[3px] text-xs opacity-80">
               Membership Expiry Alerts
             </p>
@@ -173,7 +155,6 @@ function DashboardCards() {
               Members whose subscriptions are ending within the next 7 days.
               Collect renewals and prevent membership interruptions.
             </p>
-
           </div>
 
           <button
@@ -191,11 +172,8 @@ function DashboardCards() {
           >
             View Expiry List
           </button>
-
         </div>
-
       </div>
-
     </div>
   );
 }

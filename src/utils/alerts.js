@@ -107,7 +107,7 @@ export const loadingAlert = (title = "Please Wait") =>
     },
   });
 
-  
+
 export const confirmDelete = () =>
   Swal.fire({
     ...baseConfig,
@@ -129,7 +129,7 @@ export const confirmDelete = () =>
     cancelButtonColor: "#475569",
   });
 
- export const confirmAlert = async ({
+export const confirmAlert = async ({
   title,
   text,
   confirmButtonText = "Yes",

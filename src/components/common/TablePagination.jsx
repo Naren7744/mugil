@@ -8,22 +8,15 @@ function TablePagination({
   endItem,
   setCurrentPage,
 }) {
-  const pageNumbers = Array.from(
-    { length: totalPages },
-    (_, i) => i + 1
-  );
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   const visiblePages = pageNumbers.filter(
-    (page) =>
-      page >= currentPage - 2 &&
-      page <= currentPage + 2
+    (page) => page >= currentPage - 2 && page <= currentPage + 2,
   );
 
   return (
     <div className="p-4 sm:p-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4 bg-white">
-
       <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-
         <span className="uppercase tracking-widest text-[10px] font-black text-slate-400">
           Showing
         </span>
@@ -47,17 +40,11 @@ function TablePagination({
         <span className="uppercase tracking-widest text-[10px] font-black text-slate-400">
           Entries
         </span>
-
       </div>
 
       <div className="flex items-center gap-1.5 font-mono font-bold text-xs">
-
         <button
-          onClick={() =>
-            setCurrentPage((prev) =>
-              Math.max(prev - 1, 1)
-            )
-          }
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
           className="w-8 h-8 bg-white border border-slate-200 rounded-[10px] flex items-center justify-center text-slate-600 hover:bg-slate-50 disabled:opacity-40"
         >
@@ -80,18 +67,14 @@ function TablePagination({
 
         <button
           onClick={() =>
-            setCurrentPage((prev) =>
-              Math.min(prev + 1, totalPages)
-            )
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
           }
           disabled={currentPage === totalPages}
           className="w-8 h-8 bg-white border border-slate-200 rounded-[10px] flex items-center justify-center text-slate-600 hover:bg-slate-50 disabled:opacity-40"
         >
           →
         </button>
-
       </div>
-
     </div>
   );
 }

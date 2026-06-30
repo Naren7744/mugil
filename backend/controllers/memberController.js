@@ -26,7 +26,6 @@ const createMember = async (req, res) => {
     const member =
       await Member.create(req.body);
 
-    // Update Plan Member Count
     if (req.body.selectedPlanId) {
       await Plan.findByIdAndUpdate(
         req.body.selectedPlanId,
@@ -39,7 +38,6 @@ const createMember = async (req, res) => {
       );
     }
 
-    // Initial Payment Entry
     if (initialAmountPaid > 0) {
 
       if (req.body.selectedPlanId) {
@@ -61,8 +59,8 @@ const createMember = async (req, res) => {
             .toISOString()
             .slice(0, 10)
             .replace(/-/g, "")}-${Date.now()
-            .toString()
-            .slice(-6)}`,
+              .toString()
+              .slice(-6)}`,
 
         amount: initialAmountPaid,
 
@@ -75,8 +73,8 @@ const createMember = async (req, res) => {
 
         collectedBy: "Admin",
 
-  paymentDate: new Date(),
-  balanceAfterPayment: totalAmount - initialAmountPaid,
+        paymentDate: new Date(),
+        balanceAfterPayment: totalAmount - initialAmountPaid,
       });
 
       await member.save();
@@ -166,35 +164,35 @@ const updateMember = async (req, res) => {
       req.body.amountPaid !== undefined
         ? Number(req.body.amountPaid)
         : oldAmountPaid;
-        
-if (req.body.amountPaid !== undefined) {
-  const totalAmount =
-    Number(existingMember.totalAmount || 0);
 
-  const amountPaid =
-    Number(req.body.amountPaid || 0);
-    if (amountPaid < 0) {
-  return res.status(400).json({
-    success: false,
-    message: "Invalid amount",
-  });
-}
-    if (amountPaid > totalAmount) {
-  return res.status(400).json({
-    success: false,
-    message:
-      "Amount exceeds total amount",
-  });
-}
+    if (req.body.amountPaid !== undefined) {
+      const totalAmount =
+        Number(existingMember.totalAmount || 0);
 
-  req.body.balanceAmount =
-    totalAmount - amountPaid;
+      const amountPaid =
+        Number(req.body.amountPaid || 0);
+      if (amountPaid < 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid amount",
+        });
+      }
+      if (amountPaid > totalAmount) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Amount exceeds total amount",
+        });
+      }
 
-  req.body.paymentStatus =
-    req.body.balanceAmount <= 0
-      ? "Fully Paid"
-      : "Balance Pending";
-}
+      req.body.balanceAmount =
+        totalAmount - amountPaid;
+
+      req.body.paymentStatus =
+        req.body.balanceAmount <= 0
+          ? "Fully Paid"
+          : "Balance Pending";
+    }
 
     const member = await Member.findByIdAndUpdate(
       req.params.id,
@@ -202,47 +200,47 @@ if (req.body.amountPaid !== undefined) {
       { new: true, runValidators: true }
     );
 
-if (newAmountPaid > oldAmountPaid) {
+    if (newAmountPaid > oldAmountPaid) {
 
-  const diff =
-    newAmountPaid - oldAmountPaid;
+      const diff =
+        newAmountPaid - oldAmountPaid;
 
-  member.paymentHistory.push({
-    receiptNo: `TXN-${new Date()
-      .toISOString()
-      .slice(0, 10)
-      .replace(/-/g, "")}-${Date.now()
-      .toString()
-      .slice(-6)}`,
+      member.paymentHistory.push({
+        receiptNo: `TXN-${new Date()
+          .toISOString()
+          .slice(0, 10)
+          .replace(/-/g, "")}-${Date.now()
+            .toString()
+            .slice(-6)}`,
 
-    amount: diff,
+        amount: diff,
 
-    paymentMethod:
-      req.body.paymentMethod || "Cash",
+        paymentMethod:
+          req.body.paymentMethod || "Cash",
 
-    note: "Balance Payment",
+        note: "Balance Payment",
 
-    collectedBy: "Admin",
+        collectedBy: "Admin",
 
-    paymentDate: new Date(),
-    balanceAfterPayment:
-member.balanceAmount
-  });
+        paymentDate: new Date(),
+        balanceAfterPayment:
+          member.balanceAmount
+      });
 
-  if (member.selectedPlanId) {
-    await Plan.findByIdAndUpdate(
-      member.selectedPlanId,
-      {
-        $inc: {
-          revenue: diff,
-          totalCollections: diff,
-        },
+      if (member.selectedPlanId) {
+        await Plan.findByIdAndUpdate(
+          member.selectedPlanId,
+          {
+            $inc: {
+              revenue: diff,
+              totalCollections: diff,
+            },
+          }
+        );
       }
-    );
-  }
 
-  await member.save();
-}
+      await member.save();
+    }
     res.status(200).json({
       success: true,
       message: "Member Updated Successfully",
@@ -261,32 +259,32 @@ member.balanceAmount
 =========================== */
 const deleteMember = async (req, res) => {
   try {
-const member =
-  await Member.findById(req.params.id);
+    const member =
+      await Member.findById(req.params.id);
 
-if (!member) {
-  return res.status(404).json({
-    success: false,
-    message: "Member Not Found",
-  });
-}
-
-if (member.selectedPlanId) {
-  await Plan.findByIdAndUpdate(
-    member.selectedPlanId,
-    {
-      $inc: {
-        memberCount: -1,
-        activeMembers:
-          member.status === "Active"
-            ? -1
-            : 0,
-      },
+    if (!member) {
+      return res.status(404).json({
+        success: false,
+        message: "Member Not Found",
+      });
     }
-  );
-}
 
-await member.deleteOne();
+    if (member.selectedPlanId) {
+      await Plan.findByIdAndUpdate(
+        member.selectedPlanId,
+        {
+          $inc: {
+            memberCount: -1,
+            activeMembers:
+              member.status === "Active"
+                ? -1
+                : 0,
+          },
+        }
+      );
+    }
+
+    await member.deleteOne();
 
     res.status(200).json({
       success: true,
@@ -372,8 +370,8 @@ const collectPayment = async (req, res) => {
           .toISOString()
           .slice(0, 10)
           .replace(/-/g, "")}-${Date.now()
-          .toString()
-          .slice(-6)}`,
+            .toString()
+            .slice(-6)}`,
 
       amount: paymentAmount,
 
@@ -387,19 +385,19 @@ const collectPayment = async (req, res) => {
 
       paymentDate: new Date(),
       balanceAfterPayment:
-member.balanceAmount
+        member.balanceAmount
     });
     if (member.selectedPlanId) {
-  await Plan.findByIdAndUpdate(
-    member.selectedPlanId,
-    {
-      $inc: {
-        revenue: paymentAmount,
-        totalCollections: paymentAmount,
-      },
+      await Plan.findByIdAndUpdate(
+        member.selectedPlanId,
+        {
+          $inc: {
+            revenue: paymentAmount,
+            totalCollections: paymentAmount,
+          },
+        }
+      );
     }
-  );
-}
 
     await member.save();
 
@@ -431,7 +429,6 @@ const renewMember = async (req, res) => {
       });
     }
 
-    // Don't allow renewal if previous membership has pending balance
     if (Number(member.balanceAmount || 0) > 0) {
       return res.status(400).json({
         success: false,
@@ -465,16 +462,15 @@ const renewMember = async (req, res) => {
       });
     }
 
-    // ================= DATE CALCULATION =================
 
     const today = new Date();
 
-   const oldExpiryDate =
-  member.expiryDate || null;
+    const oldExpiryDate =
+      member.expiryDate || null;
 
     const baseDate =
       member.expiryDate &&
-      new Date(member.expiryDate) > today
+        new Date(member.expiryDate) > today
         ? new Date(member.expiryDate)
         : today;
 
@@ -484,9 +480,9 @@ const renewMember = async (req, res) => {
       newExpiry.getDate() + Number(plan.durationDays)
     );
 
-  const dueDate = new Date(newExpiry);
+    const dueDate = new Date(newExpiry);
 
-    
+
 
     dueDate.setDate(dueDate.getDate() - 7);
 
@@ -495,19 +491,18 @@ const renewMember = async (req, res) => {
       .toISOString()
       .slice(0, 10)
       .replace(/-/g, "")}-${Date.now()
-      .toString()
-      .slice(-6)}`;
+        .toString()
+        .slice(-6)}`;
 
-    // ================= UPDATE MEMBER =================
 
     member.selectedPlanId = plan._id;
     member.planType = plan.name;
     member.duration = plan.duration;
 
 
-member.expiryDate = newExpiry;
+    member.expiryDate = newExpiry;
 
-member.dueDate = dueDate;
+    member.dueDate = dueDate;
 
     member.totalDays = plan.durationDays;
 
@@ -538,7 +533,6 @@ member.dueDate = dueDate;
 
     member.lastRenewalDate = today;
 
-    // ================= RENEWAL HISTORY =================
 
     member.renewalHistory.push({
       receiptNo,
@@ -551,7 +545,7 @@ member.dueDate = dueDate;
 
       oldExpiryDate,
 
-    newExpiryDate: newExpiry,
+      newExpiryDate: newExpiry,
 
       amount: paidAmount,
 
@@ -566,7 +560,6 @@ member.dueDate = dueDate;
       renewedBy: "Admin",
     });
 
-    // ================= PAYMENT HISTORY =================
 
     member.paymentHistory.push({
       receiptNo,
@@ -581,11 +574,10 @@ member.dueDate = dueDate;
       collectedBy: "Admin",
 
       note: "Membership Renewal",
-  balanceAfterPayment:
-member.balanceAmount
+      balanceAfterPayment:
+        member.balanceAmount
     });
 
-    // ================= PLAN REVENUE =================
 
     await Plan.findByIdAndUpdate(plan._id, {
       $inc: {
@@ -620,21 +612,21 @@ const getDashboardStats = async (
     const totalMembers =
       await Member.countDocuments();
 
-const members = await Member.find(
-  {},
-  {
-    paymentHistory: 1,
-  }
-).lean();
+    const members = await Member.find(
+      {},
+      {
+        paymentHistory: 1,
+      }
+    ).lean();
 
-let totalRevenue = 0;
+    let totalRevenue = 0;
 
-members.forEach((member) => {
-  (member.paymentHistory || []).forEach((payment) => {
-    totalRevenue += Number(payment.amount || 0);
-  });
-});
-   
+    members.forEach((member) => {
+      (member.paymentHistory || []).forEach((payment) => {
+        totalRevenue += Number(payment.amount || 0);
+      });
+    });
+
 
     res.status(200).json({
       success: true,
@@ -663,5 +655,5 @@ module.exports = {
   deleteMember,
   collectPayment,
   renewMember,
-   getDashboardStats,
+  getDashboardStats,
 };

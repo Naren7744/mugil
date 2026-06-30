@@ -1,11 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaInstagram, FaYoutube, FaFacebookF, FaWhatsapp, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaCrown } from 'react-icons/fa';
-import { FiArrowUp, FiSend } from 'react-icons/fi';
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  FaInstagram,
+  FaYoutube,
+  FaFacebookF,
+  FaWhatsapp,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaCrown,
+} from "react-icons/fa";
+import { FiArrowUp, FiSend } from "react-icons/fi";
 
 const Footer = () => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleSubscribe = (e) => {
@@ -14,12 +23,10 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#020202] text-zinc-400 font-sans border-t border-white/[0.03] pt-6 pb-2 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-40 overflow-hidden select-none">
-
       {/* Ambient Luxury Glow Node System: Updated to premium #ffc114 */}
       <div className="absolute right-[-10%] bottom-[-10%] w-[500px] h-[500px] bg-[#ffc114]/[0.02] rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto relative z-10">
-
         {/* =========================================================================
             TOP LAYERING: EDITORIAL HUB HEADER & NEWSLETTER
             ========================================================================= */}
@@ -37,7 +44,10 @@ const Footer = () => {
           </div>
 
           <div className="lg:col-span-5 w-full">
-            <form onSubmit={handleSubscribe} className="flex w-full bg-[#060606] border border-white/[0.04] p-1.5 focus-within:border-[#ffc114]/30 transition-all duration-500 shadow-2xl">
+            <form
+              onSubmit={handleSubscribe}
+              className="flex w-full bg-[#060606] border border-white/[0.04] p-1.5 focus-within:border-[#ffc114]/30 transition-all duration-500 shadow-2xl"
+            >
               <input
                 type="email"
                 required
@@ -59,7 +69,6 @@ const Footer = () => {
             NEW LUXURY ROW GRID SYSTEM (Ultra-Different Minimalist Layout)
             ========================================================================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-20 items-start">
-
           {/* LEFT BLOCK: Core Brand Statement (Updated Logo Navbar Style) */}
           <div className="lg:col-span-5 space-y-6">
             <Link
@@ -68,7 +77,6 @@ const Footer = () => {
             >
               {/* COMPACT PREMIUM LOGO BADGE */}
               <div className="relative w-[40px] h-[40px] flex items-center justify-center">
-
                 {/* Outer decorative ring */}
                 <div
                   className="
@@ -145,7 +153,14 @@ const Footer = () => {
                       strokeLinecap="round"
                     />
                     <defs>
-                      <linearGradient id="premiumGold" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+                      <linearGradient
+                        id="premiumGold"
+                        x1="4"
+                        y1="2"
+                        x2="20"
+                        y2="22"
+                        gradientUnits="userSpaceOnUse"
+                      >
                         <stop stopColor="#FFF5CC" />
                         <stop offset="0.5" stopColor="#ffc114" />
                         <stop offset="1" stopColor="#946f00" />
@@ -188,7 +203,9 @@ const Footer = () => {
               </div>
             </Link>
             <p className="text-zinc-500 text-[12px] font-light tracking-wide leading-relaxed max-w-sm uppercase">
-              We architect ultimate human performance configurations. A luxury sanctuary dedicated to biological mastery, precision diagnostics, and elite athletic infrastructure.
+              We architect ultimate human performance configurations. A luxury
+              sanctuary dedicated to biological mastery, precision diagnostics,
+              and elite athletic infrastructure.
             </p>
 
             {/* 🌐 Updated Social Ecosystem (Clickable and Interactive) */}
@@ -230,7 +247,6 @@ const Footer = () => {
 
           {/* RIGHT BLOCK: High-End Matrix Rows (7/12) */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-12 lg:gap-6">
-
             {/* ROW link block 1 */}
             <div className="space-y-5">
               <h4 className="text-white font-black text-[10px] tracking-[0.25em] uppercase border-l-2 border-[#ffc114] pl-3">
@@ -238,15 +254,18 @@ const Footer = () => {
               </h4>
               <ul className="space-y-3.5 text-[10px] font-bold tracking-[0.15em]">
                 {[
-                  { name: 'HOME', path: '/' },
-                  { name: 'ABOUT US', path: '/about' },
-                  { name: 'MEMBERSHIP', path: '/membership' },
-                  { name: 'TRAINERS', path: '/trainers' },
-                  { name: 'GALLERY', path: '/gallery' },
-                  { name: 'CONTACT', path: '/contact' }
+                  { name: "HOME", path: "/" },
+                  { name: "ABOUT US", path: "/about" },
+                  { name: "MEMBERSHIP", path: "/membership" },
+                  { name: "TRAINERS", path: "/trainers" },
+                  { name: "GALLERY", path: "/gallery" },
+                  { name: "CONTACT", path: "/contact" },
                 ].map((link) => (
                   <li key={link.name}>
-                    <Link to={link.path} className="text-zinc-500 hover:text-[#ffc114] transition-colors duration-300 block transform hover:translate-x-1 transition-transform ease-out">
+                    <Link
+                      to={link.path}
+                      className="text-zinc-500 hover:text-[#ffc114] transition-colors duration-300 block transform hover:translate-x-1 transition-transform ease-out"
+                    >
                       {link.name}
                     </Link>
                   </li>
@@ -260,9 +279,18 @@ const Footer = () => {
                 PRIVILEGE
               </h4>
               <ul className="space-y-3.5 text-[10px] font-bold tracking-[0.15em]">
-                {['FAQ SUITE', 'PRIVACY CODE', 'TERMS & RULES', 'REFUND POLICY', 'VIP ACCESS'].map((item) => (
+                {[
+                  "FAQ SUITE",
+                  "PRIVACY CODE",
+                  "TERMS & RULES",
+                  "REFUND POLICY",
+                  "VIP ACCESS",
+                ].map((item) => (
                   <li key={item}>
-                    <a href="#" className="text-zinc-500 hover:text-[#ffc114] transition-colors duration-300 block transform hover:translate-x-1 transition-transform ease-out">
+                    <a
+                      href="#"
+                      className="text-zinc-500 hover:text-[#ffc114] transition-colors duration-300 block transform hover:translate-x-1 transition-transform ease-out"
+                    >
                       {item}
                     </a>
                   </li>
@@ -276,31 +304,37 @@ const Footer = () => {
                 CONTACT DESK
               </h4>
               <div className="space-y-4 text-[11px] font-semibold tracking-wider">
-
-                <a href="tel:8098712009" className="flex items-center gap-3 group w-fit">
+                <a
+                  href="tel:8098712009"
+                  className="flex items-center gap-3 group w-fit"
+                >
                   <div className="w-7 h-7 bg-[#060606] border border-white/[0.04] flex items-center justify-center text-[#ffc114] group-hover:bg-[#ffc114] group-hover:text-black transition-all duration-500 shadow-md shrink-0">
                     <FaPhoneAlt className="text-[8px]" />
                   </div>
-                  <span className="text-zinc-400 group-hover:text-white transition-colors tracking-wide">+91 80987 12009</span>
+                  <span className="text-zinc-400 group-hover:text-white transition-colors tracking-wide">
+                    +91 80987 12009
+                  </span>
                 </a>
 
                 <div className="flex items-center gap-3 group w-fit">
                   <div className="w-7 h-7 bg-[#060606] border border-white/[0.04] flex items-center justify-center text-[#ffc114] group-hover:bg-[#ffc114] group-hover:text-black transition-all duration-500 shadow-md shrink-0">
                     <FaEnvelope className="text-[8px]" />
                   </div>
-                  <span className="text-zinc-400 group-hover:text-white transition-colors lowercase font-sans text-[10.5px]">concierge@mugilfitness.com</span>
+                  <span className="text-zinc-400 group-hover:text-white transition-colors lowercase font-sans text-[10.5px]">
+                    concierge@mugilfitness.com
+                  </span>
                 </div>
 
                 <div className="flex items-start gap-3 group leading-relaxed w-fit">
                   <div className="w-7 h-7 bg-[#060606] border border-white/[0.04] flex items-center justify-center text-[#ffc114] group-hover:bg-[#ffc114] group-hover:text-black transition-all duration-500 shadow-md shrink-0 mt-0.5">
                     <FaMapMarkerAlt className="text-[9px]" />
                   </div>
-                  <span className="text-zinc-500 group-hover:text-zinc-300 transition-colors text-[9.5px] tracking-widest uppercase">SALEM REGION, TN</span>
+                  <span className="text-zinc-500 group-hover:text-zinc-300 transition-colors text-[9.5px] tracking-widest uppercase">
+                    SALEM REGION, TN
+                  </span>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
 
@@ -308,18 +342,21 @@ const Footer = () => {
             SUB-FOOTER: BRAND LOGISTICS METRICS & COPYRIGHT (Ultra Premium Redesign)
             ========================================================================= */}
         <div className="relative border-t border-white/[0.04] pt-5 mt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[9px] tracking-[0.3em] font-medium text-zinc-600 bg-gradient-to-r from-transparent via-white/[0.01] to-transparent py-4 px-4 rounded-lg backdrop-blur-sm group/sub">
-
           {/* Subtle bottom decorative accent lines */}
           <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-[#ffc114]/20 to-transparent transition-all duration-1000 group-hover/sub:via-[#ffc114]/40" />
 
           <p className="uppercase leading-relaxed text-center sm:text-left">
-            &copy; {new Date().getFullYear()} <span className="text-zinc-300 font-black tracking-[0.25em] transition-colors duration-500 group-hover/sub:text-[#ffc114]">MUGIL FITNESS</span> & <span className="text-zinc-300 font-black tracking-[0.25em] transition-colors duration-500 group-hover/sub:text-[#ffc114]">SP FITNESS</span>. ALL RIGHTS RESERVED.
+            &copy; {new Date().getFullYear()}{" "}
+            <span className="text-zinc-300 font-black tracking-[0.25em] transition-colors duration-500 group-hover/sub:text-[#ffc114]">
+              MUGIL FITNESS
+            </span>{" "}
+            &{" "}
+            <span className="text-zinc-300 font-black tracking-[0.25em] transition-colors duration-500 group-hover/sub:text-[#ffc114]">
+              SP FITNESS
+            </span>
+            . ALL RIGHTS RESERVED.
           </p>
-
-     
-
         </div>
-
       </div>
     </footer>
   );

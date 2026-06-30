@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { HiMenu, HiX } from 'react-icons/hi'; 
-import { FiChevronRight, FiLock } from 'react-icons/fi';
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { HiMenu, HiX } from "react-icons/hi";
+import { FiChevronRight, FiLock } from "react-icons/fi";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -9,11 +9,13 @@ const Navbar = () => {
 
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
-    return () => { document.body.style.overflow = 'unset'; };
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
@@ -21,23 +23,21 @@ const Navbar = () => {
   }, [location]);
 
   const navLinks = [
-    { name: 'HOME', path: '/' },
-    { name: 'ABOUT', path: '/about' },
-    { name: 'MEMBERSHIP', path: '/membership' },
-    { name: 'TRAINERS', path: '/trainers' },
-    { name: 'GALLERY', path: '/gallery' },
-    { name: 'CONTACT', path: '/contact' },
+    { name: "HOME", path: "/" },
+    { name: "ABOUT", path: "/about" },
+    { name: "MEMBERSHIP", path: "/membership" },
+    { name: "TRAINERS", path: "/trainers" },
+    { name: "GALLERY", path: "/gallery" },
+    { name: "CONTACT", path: "/contact" },
   ];
 
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-[999] bg-gradient-to-b from-black/95 via-black/60 to-transparent backdrop-blur-[4px]">
-        
         {/* =========================================================
             CONTAINER — Perfectly Aligned Center Wrapper With Max-Width
         ========================================================== */}
         <div className="max-w-7xl w-full mx-auto h-24 px-4 sm:px-6 md:px-8 lg:px-12 flex items-center justify-between gap-4">
-
           {/* =========================================================
               LEFT SIDE — COMPACT PREMIUM LOGO & BRAND (Left Aligned)
           ========================================================== */}
@@ -90,7 +90,14 @@ const Navbar = () => {
                       strokeLinecap="round"
                     />
                     <defs>
-                      <linearGradient id="premiumGold" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+                      <linearGradient
+                        id="premiumGold"
+                        x1="4"
+                        y1="2"
+                        x2="20"
+                        y2="22"
+                        gradientUnits="userSpaceOnUse"
+                      >
                         <stop stopColor="#FFF5CC" />
                         <stop offset="0.5" stopColor="#ffc114" />
                         <stop offset="1" stopColor="#946f00" />
@@ -135,8 +142,8 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `text-[11px] font-bold tracking-[0.13em] uppercase transition-all duration-300 relative py-2 select-none ${
                     isActive
-                      ? 'text-[#ffc114]'
-                      : 'text-white/90 hover:text-zinc-400'
+                      ? "text-[#ffc114]"
+                      : "text-white/90 hover:text-zinc-400"
                   }`
                 }
               >
@@ -149,7 +156,7 @@ const Navbar = () => {
                         bg-[#ffc114]
                         transition-all duration-300
                         transform origin-left
-                        ${isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}
+                        ${isActive ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}
                       `}
                     />
                   </>
@@ -207,19 +214,24 @@ const Navbar = () => {
               className="flex items-center justify-center w-10 h-10 relative z-[1001] text-white text-2xl focus:outline-none cursor-pointer"
               aria-label="Toggle Menu"
             >
-              {isMobileMenuOpen ? <HiX className="text-[#ffc114]" /> : <HiMenu />}
+              {isMobileMenuOpen ? (
+                <HiX className="text-[#ffc114]" />
+              ) : (
+                <HiMenu />
+              )}
             </button>
           </div>
-
         </div>
       </nav>
 
       {/* =========================================================
           MOBILE OVERLAY
       ========================================================== */}
-      <div 
+      <div
         className={`fixed inset-0 z-[997] bg-black/70 backdrop-blur-sm lg:hidden transition-opacity duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          isMobileMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
       />
@@ -228,8 +240,8 @@ const Navbar = () => {
           MOBILE SIDE DRAWER
       ========================================================== */}
       <div
-  className={`fixed top-0 right-0 z-[1000] w-[280px] sm:w-[320px] h-dvh overflow-y-auto bg-[#0a0a0a] border-l border-white/[0.05] lg:hidden flex flex-col pt-24 pb-6 px-5 transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0 z-[1000] w-[280px] sm:w-[320px] h-dvh overflow-y-auto bg-[#0a0a0a] border-l border-white/[0.05] lg:hidden flex flex-col pt-24 pb-6 px-5 transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* NAV LINKS */}
@@ -241,20 +253,22 @@ const Navbar = () => {
                 key={link.name}
                 to={link.path}
                 className={`flex items-center justify-between px-4 py-3.5 rounded-lg text-[12px] font-bold tracking-[0.1em] uppercase transition-all duration-200 ${
-                  isActive 
-                    ? 'bg-[#ffc114]/10 text-[#ffc114]' 
-                    : 'text-zinc-300 hover:bg-white/[0.02] hover:text-white'
+                  isActive
+                    ? "bg-[#ffc114]/10 text-[#ffc114]"
+                    : "text-zinc-300 hover:bg-white/[0.02] hover:text-white"
                 }`}
               >
                 <span>{link.name}</span>
-                <FiChevronRight className={`text-sm transition-transform duration-200 ${isActive ? 'text-[#ffc114] translate-x-0' : 'text-zinc-600 opacity-0'}`} />
+                <FiChevronRight
+                  className={`text-sm transition-transform duration-200 ${isActive ? "text-[#ffc114] translate-x-0" : "text-zinc-600 opacity-0"}`}
+                />
               </NavLink>
             );
           })}
         </div>
 
         {/* DRAWER FOOTER — MOBILE LOGIN */}
-      <div className="mt-8 border-t border-white/[0.05] pt-6">
+        <div className="mt-8 border-t border-white/[0.05] pt-6">
           <Link to="/adminLogin" className="block w-full">
             <button
               className="
